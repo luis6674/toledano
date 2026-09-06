@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>El Toledano | Guillermo Toledano</title>
+  <meta name="description" content="El Toledano: 10 historias, 10 canciones, el lugar donde todo empezó." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <main id="stage-wrapper">
+    <div id="stage">
+      <img class="bg" src="assets/images/fondo.jpg" alt="Interior de El Toledano" />
+
+      <img id="logo-overlay" src="assets/images/logo_home_txt.png" alt="El Toledano. 10 historias, 10 canciones. El lugar donde todo empezó." />
+      <button id="registrate-btn" type="button" aria-label="Regístrate para acceder">
+        <span class="sr-only">Regístrate para acceder</span>
+      </button>
+
+      <div id="locks-layer"></div>
+    </div>
+  </main>
+
+  <!-- Toast de aviso (candado aún bloqueado, errores, etc.) -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Modal genérico: se rellena por JS según el candado pulsado -->
+  <div id="modal-backdrop" hidden>
+    <div id="modal" class="napkin" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button id="modal-close" type="button" aria-label="Cerrar">Cerrar</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Plantillas de contenido (clonadas por JS) -->
+  <template id="tpl-gate">
+    <div class="panel panel-subscribe">
+      <h2 class="modal-heading">Regístrate</h2>
+      <p class="gate-switch">
+        ¿Ya tienes la contraseña?
+        <button type="button" class="link-btn" data-action="show-password">Introdúcela aquí</button>
+      </p>
+      <form class="subscribe-form" novalidate>
+        <div class="form-grid">
+          <input type="text" name="nombre" placeholder="NOMBRE" required />
+          <input type="text" name="apellidos" placeholder="APELLIDOS" required />
+          <input type="email" name="email" placeholder="EMAIL" required />
+          <input type="text" name="ciudad" placeholder="CIUDAD" />
+          <input type="text" name="provincia" placeholder="PROVINCIA" />
+          <input type="text" name="pais" placeholder="PAÍS" />
+          <input type="text" name="fecha_nacimiento" placeholder="FECHA DE NACIMIENTO" onfocus="(this.type='date')" />
+          <button type="submit" class="btn-red">Suscríbete</button>
+        </div>
+        <label class="checkbox-line">
+          <input type="checkbox" name="consentimiento_privacidad" required />
+          <span>He leído y acepto la política de privacidad y, en consecuencia, deseo recibir información sobre El Guillermo Toledano a través de correo electrónico, SMS, WhatsApp u otros medios electrónicos.</span>
+        </label>
+        <label class="checkbox-line">
+          <input type="checkbox" name="consentimiento_comercial" />
+          <span>Quiero recibir información comercial, concursos, material promocional de Sony Music Entertainment España, S.L. y sus artistas a través de correo electrónico, SMS, WhatsApp u otros medios electrónicos.</span>
+        </label>
+        <p class="form-msg" data-role="form-msg" hidden></p>
+      </form>
+    </div>
+    <div class="panel panel-password" hidden>
+      <h2 class="modal-heading">Contraseña</h2>
+      <p class="gate-copy">Introduce la contraseña que recibiste en el email de bienvenida.</p>
+      <form class="password-form" novalidate>
+        <input type="password" name="password" placeholder="CONTRASEÑA" required autocomplete="off" />
+        <button type="submit" class="btn-red">Acceder</button>
+        <p class="form-msg" data-role="password-msg" hidden></p>
+      </form>
+    </div>
+    <img class="modal-signature" src="assets/images/logo_seundarias.png" alt="El Toledano" />
+  </template>
+
+  <template id="tpl-content">
+    <p class="modal-eyebrow" data-role="eyebrow"></p>
+    <h2 class="modal-heading" data-role="title"></h2>
+    <div class="modal-media" data-role="media"></div>
+    <p class="modal-description" data-role="description"></p>
+    <img class="modal-signature" src="assets/images/logo_seundarias.png" alt="El Toledano" />
+  </template>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

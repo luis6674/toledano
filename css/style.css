@@ -1,0 +1,442 @@
+@font-face {
+  font-family: "IKnowAGhost";
+  src: url("../assets/fonts/iknowaghost.ttf") format("truetype");
+  font-display: swap;
+}
+
+:root {
+  --red: #c0392b;
+  --green: #40bc3f;
+  --paper: #f3efe4;
+  --ink: #1c1a17;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #0c0b0a;
+  color: var(--ink);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Escenario principal ---------- */
+
+#stage-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+#stage {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  aspect-ratio: 1920 / 1282;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+#stage .bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+#logo-overlay {
+  position: absolute;
+  top: 1.5%;
+  left: 10%;
+  width: 24%;
+  min-width: 140px;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
+}
+
+#registrate-btn {
+  /* Posición y tamaño calculados en JS a partir del recuadro real de
+     #logo-overlay (la franja "REGÍSTRATE PARA ACCEDER" del papel rasgado
+     ocupa, dentro de esa imagen, aprox. el 83%-99% de su alto). */
+  position: absolute;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+/* ---------- Candados ---------- */
+
+.lock {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.lock img {
+  width: clamp(22px, 3vw, 42px);
+  height: clamp(22px, 3vw, 42px);
+  display: block;
+  transition: transform 0.15s ease;
+}
+
+.lock:hover img {
+  transform: scale(1.12);
+}
+
+.lock.is-shaking img {
+  animation: lock-shake 0.4s ease;
+}
+
+@keyframes lock-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(3px); }
+}
+
+.lock-label {
+  text-align: center;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.lock-label .lock-title {
+  display: block;
+  color: #fff;
+  font-weight: 700;
+  font-size: clamp(10px, 1.1vw, 16px);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.lock-label .lock-subtitle {
+  display: block;
+  color: var(--green);
+  font-weight: 700;
+  font-size: clamp(9px, 0.9vw, 13px);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* ---------- Toast ---------- */
+
+#toast {
+  position: fixed;
+  left: 50%;
+  bottom: 32px;
+  transform: translate(-50%, 20px);
+  background: var(--ink);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  max-width: 90vw;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 1000;
+}
+
+#toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ---------- Modal ---------- */
+
+#modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 900;
+}
+
+#modal-backdrop[hidden] { display: none; }
+
+#modal.napkin {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  max-height: 88vh;
+  overflow-y: auto;
+  background: var(--paper) url("../assets/images/Fondo_secundarias_servilleta.png") center / cover no-repeat;
+  border: 6px double var(--red);
+  border-radius: 4px;
+  padding: 48px 40px 32px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+#modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  border: 0;
+  background: #fff;
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+}
+
+.modal-eyebrow {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin: 0 0 4px;
+  font-size: 14px;
+}
+
+.modal-heading {
+  text-align: center;
+  text-transform: uppercase;
+  font-family: Arial, sans-serif;
+  font-weight: 900;
+  font-size: clamp(24px, 4vw, 40px);
+  margin: 0 0 8px;
+  letter-spacing: 0.01em;
+}
+
+.modal-description {
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.5;
+  max-width: 46ch;
+  margin: 16px auto 0;
+}
+
+.modal-signature {
+  display: block;
+  margin: 28px auto 0;
+  width: 110px;
+}
+
+.modal-media { margin-top: 20px; }
+
+/* --- reproductor de audio/voz --- */
+
+.audio-player {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.audio-player .time { font-size: 12px; min-width: 34px; text-align: center; }
+
+.audio-player input[type="range"] {
+  flex: 1;
+  accent-color: var(--ink);
+}
+
+.audio-player button {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--ink);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* --- vídeo --- */
+
+.modal-media video {
+  width: 100%;
+  display: block;
+  border-radius: 2px;
+  background: #000;
+}
+
+/* --- galería --- */
+
+.gallery-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.gallery-grid img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  cursor: zoom-in;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+  border: 4px solid #fff;
+}
+
+.gallery-hint {
+  text-align: center;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-top: 10px;
+  opacity: 0.7;
+}
+
+#lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 1100;
+  cursor: zoom-out;
+}
+
+#lightbox[hidden] { display: none; }
+
+#lightbox img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* --- texto / manuscrito --- */
+
+.manuscript-body {
+  white-space: pre-line;
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 50ch;
+  margin: 0 auto;
+}
+
+/* --- formulario de suscripción --- */
+
+.gate-switch {
+  text-align: center;
+  font-size: 13px;
+  margin: 0 0 20px;
+}
+
+.link-btn {
+  background: none;
+  border: 0;
+  color: var(--red);
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.form-grid input {
+  grid-column: span 1;
+  padding: 12px 10px;
+  border: 0;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+}
+
+.form-grid input::placeholder { color: #cfcfcf; }
+
+.btn-red {
+  grid-column: span 1;
+  background: var(--red);
+  color: #fff;
+  border: 0;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 12px 10px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.checkbox-line {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  font-size: 10.5px;
+  line-height: 1.4;
+  margin-top: 14px;
+}
+
+.checkbox-line input { margin-top: 3px; }
+
+.form-msg {
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 14px;
+  text-align: center;
+}
+
+.form-msg.is-error { color: var(--red); }
+.form-msg.is-ok { color: #1c7d1a; }
+
+.panel-password {
+  text-align: center;
+}
+
+.gate-copy {
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.password-form input {
+  padding: 12px 10px;
+  border: 0;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 640px) {
+  .form-grid { grid-template-columns: 1fr; }
+  #modal.napkin { padding: 40px 20px 24px; }
+}
