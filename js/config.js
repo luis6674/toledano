@@ -188,6 +188,23 @@ const LOCKS = [
     },
   },
   {
+    // Candado sobre la barra, junto al letrero ovalado "El Toledano" (no
+    // confundir con el enlace de "Reservar álbum", que está más a la
+    // derecha, sobre la pizarra, y no es un candado).
+    id: "letrero-barra",
+    top: 57.76,
+    left: 72.81,
+    unlocked: false,
+    requiresPassword: false,
+    label: null,
+    content: {
+      type: "text",
+      title: "Nombre canción",
+      eyebrow: "Recuerdo desbloqueado",
+      body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    },
+  },
+  {
     id: "reloj-arena",
     top: 83.23,
     left: 40.63,
