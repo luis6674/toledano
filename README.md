@@ -39,6 +39,16 @@ desbloqueando después ya no la piden.
 La contraseña se configura en `SITE_CONFIG.password` (placeholder actual:
 `eltoledano`).
 
+### El candado de "Reservas abiertas" (enlace externo)
+
+El candado sobre la pizarra "RESERVAS ABIERTAS" no abre una ventana
+emergente: lleva directamente a una URL externa (`content.type: "link"`).
+Todavía no tenemos esa URL, así que está como `unlocked: false` con
+`url: null`. Cuando la tengamos: pegarla en `content.url` y poner
+`unlocked: true`. Si algún día se despliega con `unlocked: true` pero sin
+URL, el visitante ve un aviso de "disponible próximamente" en vez de un
+enlace roto.
+
 ### Formulario de alta en la newsletter (Sony Music)
 
 El formulario "Regístrate" todavía no tiene destino: Sony Music aún tiene
@@ -70,9 +80,16 @@ Sony Music.
 ## Notas / limitaciones conocidas
 
 - La posición de los candados está en porcentaje sobre `assets/images/fondo.jpg`,
-  así que la escena mantiene siempre su proporción (1920×1282). En móviles
-  muy estrechos esto deja franjas oscuras arriba/abajo en vez de recortar la
-  imagen, para que los candados nunca se desalineen.
+  así que la escena mantiene siempre su proporción (1920×1282).
+- En móvil (ancho de pantalla ≤ 900px) la escena ocupa toda la altura de la
+  pantalla y se ve completa desplazando en horizontal, en vez de encogerse
+  para caber entera (así los candados no se vuelven diminutos). Al cargar,
+  se muestra brevemente un aviso ("Desliza para ver todo el bar →") y la
+  escena se desplaza sola un poco a modo de pista; en cuanto el usuario
+  toca la pantalla o hace scroll, la animación se cancela. Todo esto está
+  en la sección final de `js/app.js` (`initMobileAutoScroll`) por si se
+  quiere afinar el comportamiento más adelante (por ejemplo, iconos de
+  flecha en vez de texto, o repetir la pista si no ha habido interacción).
 - El desbloqueo es manual y offline (no depende de la fecha del sistema del
   visitante): cada actualización se publica subiendo una nueva versión de
   `js/config.js` con los candados que correspondan ya en verde.

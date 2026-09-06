@@ -20,6 +20,7 @@ html, body {
   background: #0c0b0a;
   color: var(--ink);
   font-family: "Helvetica Neue", Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 .sr-only {
@@ -47,6 +48,64 @@ html, body {
   aspect-ratio: 1920 / 1282;
   margin: 0 auto;
   overflow: hidden;
+}
+
+/* En pantallas estrechas (móvil) la escena llena el alto de la pantalla y
+   se navega deslizando en horizontal, en vez de encogerla para que quepa
+   entera (así los candados no se vuelven diminutos). */
+@media (max-width: 900px) {
+  #stage-wrapper {
+    align-items: stretch;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  #stage {
+    width: auto;
+    height: 100vh;
+    height: 100dvh;
+    max-width: none;
+    margin: 0;
+    flex-shrink: 0;
+  }
+}
+
+#scroll-hint {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  #scroll-hint {
+    display: block;
+    position: fixed;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 9px 18px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    z-index: 500;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+    animation: hint-nudge 1.4s ease-in-out infinite;
+  }
+
+  #scroll-hint.is-hidden {
+    opacity: 0;
+  }
+}
+
+@keyframes hint-nudge {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-46%, 0); }
 }
 
 #stage .bg {

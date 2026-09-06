@@ -157,6 +157,15 @@
       return;
     }
 
+    if (lock.content.type === "link") {
+      if (lock.content.url) {
+        window.open(lock.content.url, "_blank", "noopener");
+      } else {
+        showToast("Este enlace estará disponible próximamente.");
+      }
+      return;
+    }
+
     openContentModal(lock);
   }
 
@@ -432,4 +441,78 @@
     lightbox.hidden = true;
     lightboxImg.src = "";
   });
+
+  // ---------------------------------------------------------------
+  // Móvil: la escena ocupa toda la altura y se desplaza en horizontal.
+  // Mostramos una pista y un pequeño auto-scroll de cortesía al cargar,
+  // que se cancela en cuanto el usuario toca/hace scroll por su cuenta.
+  // ---------------------------------------------------------------
+
+  var stageWrapper = document.getElementById("stage-wrapper");
+  var scrollHint = document.getElementById("scroll-hint");
+  var mobileQuery = window.matchMedia("(max-width: 900px)");
+
+  function initMobileAutoScroll() {
+    if (!mobileQuery.matches) return;
+
+    var cancelled = false;
+    function cancel() {
+      if (cancelled) return;
+      cancelled = true;
+      hideHint();
+      ["pointerdown", "touchstart", "wheel"].forEach(function (evt) {
+        stageWrapper.removeEventListener(evt, cancel);
+      });
+    }
+    ["pointerdown", "touchstart", "wheel"].forEach(function (evt) {
+      stageWrapper.addEventListener(evt, cancel, { passive: true });
+    });
+
+    function hideHint() {
+      if (scrollHint) scrollHint.classList.add("is-hidden");
+    }
+
+    // La pista desaparece sola pasado un rato, se haya usado o no.
+    setTimeout(hideHint, 5000);
+
+    setTimeout(function () {
+      if (cancelled) return;
+      var maxScroll = stageWrapper.scrollWidth - stageWrapper.clientWidth;
+      if (maxScroll <= 0) return;
+
+      var start = null;
+      var duration = 1600;
+      var target = Math.min(maxScroll, stageWrapper.clientWidth * 0.55);
+
+      function easeInOutQuad(t) {
+        return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+      }
+
+      function step(timestamp) {
+        if (cancelled) return;
+        if (start === null) start = timestamp;
+        var progress = Math.min((timestamp - start) / duration, 1);
+        stageWrapper.scrollLeft = easeInOutQuad(progress) * target;
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          setTimeout(function () {
+            if (cancelled) return;
+            var backStart = null;
+            function stepBack(ts) {
+              if (cancelled) return;
+              if (backStart === null) backStart = ts;
+              var p = Math.min((ts - backStart) / duration, 1);
+              stageWrapper.scrollLeft = (1 - easeInOutQuad(p)) * target;
+              if (p < 1) requestAnimationFrame(stepBack);
+            }
+            requestAnimationFrame(stepBack);
+          }, 500);
+        }
+      }
+      requestAnimationFrame(step);
+    }, 900);
+  }
+
+  initMobileAutoScroll();
 })();

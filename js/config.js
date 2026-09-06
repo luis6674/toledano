@@ -45,6 +45,13 @@ const SITE_CONFIG = {
  *   - "video"   -> reproductor de vídeo
  *   - "gallery" -> galería de fotos
  *   - "text"    -> texto / manuscrito
+ *   - "link"    -> no abre ventana emergente: al pulsar el candado, abre una
+ *                  URL externa en una pestaña nueva (p.ej. la pizarra de
+ *                  "Reservas abiertas"). Admite: url. Si "url" está a null,
+ *                  el candado puede estar desbloqueado igualmente, pero al
+ *                  pulsarlo se avisa de que el enlace estará disponible
+ *                  próximamente (así se puede desplegar el sitio antes de
+ *                  tener el enlace definitivo).
  *
  * Todos los tipos admiten: title, eyebrow (texto pequeño superior),
  * description.
@@ -190,10 +197,11 @@ const LOCKS = [
     requiresPassword: false,
     label: null,
     content: {
-      type: "text",
-      title: "Reservas abiertas",
-      eyebrow: "Preventa del álbum",
-      body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      // Pizarra "RESERVAS ABIERTAS": no abre un pop-up, lleva directamente
+      // a una URL externa (todavía por confirmar). Cuando la tengamos,
+      // rellenar "url" y poner unlocked:true.
+      type: "link",
+      url: null,
     },
   },
   {
