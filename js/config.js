@@ -23,6 +23,11 @@ const SITE_CONFIG = {
   // todavía no está activa, pero se puede seguir probando el acceso
   // con contraseña ("¿Ya tienes la contraseña?").
   subscribeEndpoint: null,
+
+  // URL de "reservar/comprar el álbum". No es un candado: es un enlace
+  // externo siempre visible, colocado sobre la pizarra "RESERVAS ABIERTAS"
+  // del fondo. De momento apunta a la home de Sony Music como marcador.
+  reserveUrl: "https://www.sonymusic.es/",
 };
 
 /**
@@ -45,13 +50,6 @@ const SITE_CONFIG = {
  *   - "video"   -> reproductor de vídeo
  *   - "gallery" -> galería de fotos
  *   - "text"    -> texto / manuscrito
- *   - "link"    -> no abre ventana emergente: al pulsar el candado, abre una
- *                  URL externa en una pestaña nueva (p.ej. la pizarra de
- *                  "Reservas abiertas"). Admite: url. Si "url" está a null,
- *                  el candado puede estar desbloqueado igualmente, pero al
- *                  pulsarlo se avisa de que el enlace estará disponible
- *                  próximamente (así se puede desplegar el sitio antes de
- *                  tener el enlace definitivo).
  *
  * Todos los tipos admiten: title, eyebrow (texto pequeño superior),
  * description.
@@ -187,21 +185,6 @@ const LOCKS = [
       title: "Nombre canción",
       eyebrow: "Recuerdo desbloqueado",
       images: [{ src: "assets/images/fondo.jpg", alt: "Foto de recuerdo" }],
-    },
-  },
-  {
-    id: "reservas",
-    top: 57.76,
-    left: 72.81,
-    unlocked: false,
-    requiresPassword: false,
-    label: null,
-    content: {
-      // Pizarra "RESERVAS ABIERTAS": no abre un pop-up, lleva directamente
-      // a una URL externa (todavía por confirmar). Cuando la tengamos,
-      // rellenar "url" y poner unlocked:true.
-      type: "link",
-      url: null,
     },
   },
   {

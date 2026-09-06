@@ -39,15 +39,16 @@ desbloqueando después ya no la piden.
 La contraseña se configura en `SITE_CONFIG.password` (placeholder actual:
 `eltoledano`).
 
-### El candado de "Reservas abiertas" (enlace externo)
+### El enlace de "Reservar álbum"
 
-El candado sobre la pizarra "RESERVAS ABIERTAS" no abre una ventana
-emergente: lleva directamente a una URL externa (`content.type: "link"`).
-Todavía no tenemos esa URL, así que está como `unlocked: false` con
-`url: null`. Cuando la tengamos: pegarla en `content.url` y poner
-`unlocked: true`. Si algún día se despliega con `unlocked: true` pero sin
-URL, el visitante ve un aviso de "disponible próximamente" en vez de un
-enlace roto.
+La pizarra "RESERVAS ABIERTAS" **no es un candado**: es un enlace externo
+siempre visible (no depende de fechas ni de la contraseña) colocado justo
+encima de esa zona de la imagen de fondo. Se configura con
+`SITE_CONFIG.reserveUrl` en `js/config.js` — de momento apunta a
+`https://www.sonymusic.es/` como marcador. En cuanto exista la URL
+definitiva de reservas/preventa, basta con cambiar ese valor. Si algún día
+`reserveUrl` estuviera vacío, el visitante ve un aviso de "disponible
+próximamente" en vez de un enlace roto.
 
 ### Formulario de alta en la newsletter (Sony Music)
 

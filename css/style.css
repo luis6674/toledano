@@ -139,6 +139,15 @@ html, body {
   cursor: pointer;
 }
 
+#reserve-link {
+  position: absolute;
+  top: 44.1%;
+  left: 80.14%;
+  width: 15.07%;
+  height: 24.1%;
+  display: block;
+}
+
 /* ---------- Candados ---------- */
 
 .lock {

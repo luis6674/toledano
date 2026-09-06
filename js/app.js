@@ -92,6 +92,20 @@
   });
 
   // ---------------------------------------------------------------
+  // Enlace de "Reservar álbum" sobre la pizarra del fondo
+  // ---------------------------------------------------------------
+
+  var reserveLink = document.getElementById("reserve-link");
+  if (SITE_CONFIG.reserveUrl) {
+    reserveLink.href = SITE_CONFIG.reserveUrl;
+  } else {
+    reserveLink.addEventListener("click", function (evt) {
+      evt.preventDefault();
+      showToast("El enlace para reservar el álbum estará disponible próximamente.");
+    });
+  }
+
+  // ---------------------------------------------------------------
   // Pintar los candados
   // ---------------------------------------------------------------
 
@@ -154,15 +168,6 @@
 
     if (lock.requiresPassword && !isPasswordVerified()) {
       openSubscribeGate(lock);
-      return;
-    }
-
-    if (lock.content.type === "link") {
-      if (lock.content.url) {
-        window.open(lock.content.url, "_blank", "noopener");
-      } else {
-        showToast("Este enlace estará disponible próximamente.");
-      }
       return;
     }
 
