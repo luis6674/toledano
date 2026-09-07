@@ -197,7 +197,7 @@ html, body {
   display: block;
   color: #fff;
   font-weight: 700;
-  font-size: clamp(10px, 1.1vw, 16px);
+  font-size: clamp(12px, 1.1vw, 16px);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
@@ -205,7 +205,7 @@ html, body {
   display: block;
   color: var(--green);
   font-weight: 700;
-  font-size: clamp(9px, 0.9vw, 13px);
+  font-size: clamp(11px, 0.9vw, 14px);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
@@ -320,7 +320,7 @@ html, body {
   gap: 14px;
 }
 
-.audio-player .time { font-size: 12px; min-width: 34px; text-align: center; }
+.audio-player .time { font-size: 13px; min-width: 34px; text-align: center; }
 
 .audio-player input[type="range"] {
   flex: 1;
@@ -368,7 +368,7 @@ html, body {
 
 .gallery-hint {
   text-align: center;
-  font-size: 12px;
+  font-size: 13px;
   text-transform: uppercase;
   font-weight: 700;
   margin-top: 10px;
@@ -408,7 +408,7 @@ html, body {
 
 .gate-switch {
   text-align: center;
-  font-size: 13px;
+  font-size: 14px;
   margin: 0 0 20px;
 }
 
@@ -436,7 +436,7 @@ html, body {
   background: var(--ink);
   color: #fff;
   font-weight: 700;
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: 0.03em;
 }
 
@@ -451,14 +451,14 @@ html, body {
   letter-spacing: 0.03em;
   padding: 12px 10px;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .checkbox-line {
   display: flex;
   gap: 8px;
   align-items: flex-start;
-  font-size: 10.5px;
+  font-size: 14px;
   line-height: 1.4;
   margin-top: 14px;
 }
@@ -466,7 +466,7 @@ html, body {
 .checkbox-line input { margin-top: 3px; }
 
 .form-msg {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   margin-top: 14px;
   text-align: center;
