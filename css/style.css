@@ -251,32 +251,42 @@ html, body {
 
 #modal.napkin {
   position: relative;
-  width: 100%;
-  max-width: 640px;
-  max-height: 88vh;
-  overflow-y: auto;
-  background: var(--paper) url("../assets/images/Fondo_secundarias_servilleta.png") center / cover no-repeat;
-  border: 6px double var(--red);
-  border-radius: 4px;
-  padding: 48px 40px 32px;
+  width: 520px;
+  height: 602px;
+  /*overflow-y: auto;*/
+  background: transparent url("../assets/images/Fondo_secundarias_servilleta.png") center / 100% auto no-repeat;
+  padding: 55px 68px 60px 61px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
 }
-
+#modal-body {
+  position: relative;
+  max-height: 100%;
+  overflow-y: auto;
+}
 #modal-close {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 68px;
-  height: 68px;
+  top: 18px;
+  right: 28px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   border: 0;
-  background: #fff;
+  background: transparent;
   color: var(--ink);
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 700;
-  letter-spacing: 0.04em;
   cursor: pointer;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+}
+@media (min-width: 1024px), (max-height: 600px) {
+  #modal.napkin {
+    width: 487px;
+    height: 560px;
+    padding: 50px 62px 54px 55px;
+  }
+  #modal-close {
+    top: 15px;
+    right: 25px;
+  }
 }
 
 .modal-eyebrow {
@@ -506,5 +516,7 @@ html, body {
 
 @media (max-width: 640px) {
   .form-grid { grid-template-columns: 1fr; }
-  #modal.napkin { padding: 40px 20px 24px; }
+  #modal-backdrop { padding: 0; }
+  #modal.napkin { width: 100vw; height: 115vw; padding: 10.8vw 13vw 11.1vw 11.2vw; }
+  #modal-close { top: 8px; right: 16px; }
 }
