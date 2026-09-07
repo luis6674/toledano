@@ -70,10 +70,10 @@
   function layoutRegistrateButton() {
     var rect = logoOverlay.getBoundingClientRect();
     var stageRect = stage.getBoundingClientRect();
-    var top = rect.top - stageRect.top + rect.height * 0.83;
+    var top = rect.top - stageRect.top + rect.height * 0.82;
     var left = rect.left - stageRect.left + rect.width * 0.01;
-    var width = rect.width * 0.93;
-    var height = rect.height * 0.16;
+    var width = rect.width * 0.8;
+    var height = rect.height * 0.17;
     registrateBtn.style.top = top + "px";
     registrateBtn.style.left = left + "px";
     registrateBtn.style.width = width + "px";

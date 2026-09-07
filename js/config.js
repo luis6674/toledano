@@ -65,8 +65,8 @@ const SITE_CONFIG = {
 const LOCKS = [
   {
     id: "perchero",
-    top: 47.54,
-    left: 28.91,
+    top: 47,
+    left: 32.7,
     unlocked: false,
     requiresPassword: false,
     label: null,
@@ -80,7 +80,7 @@ const LOCKS = [
   {
     id: "fotos-pared",
     top: 38.21,
-    left: 39.04,
+    left: 41.04,
     unlocked: false,
     requiresPassword: false,
     label: null,
@@ -97,8 +97,8 @@ const LOCKS = [
   },
   {
     id: "puerta",
-    top: 38.97,
-    left: 50.89,
+    top: 39.5,
+    left: 51.3,
     // Este candado forma parte del primer lote (junto con "bola-disco" y
     // "mariposa"): se desbloquea con la contraseña de la newsletter.
     unlocked: false,
@@ -115,7 +115,7 @@ const LOCKS = [
   {
     id: "corazones",
     top: 42.03,
-    left: 60.54,
+    left: 59.15,
     unlocked: false,
     requiresPassword: false,
     label: null,
@@ -130,7 +130,7 @@ const LOCKS = [
   {
     id: "camara",
     top: 32.67,
-    left: 78.08,
+    left: 74.08,
     unlocked: false,
     requiresPassword: false,
     label: null,
@@ -144,7 +144,7 @@ const LOCKS = [
   {
     id: "esquina",
     top: 28.77,
-    left: 95.8,
+    left: 90.8,
     unlocked: false,
     requiresPassword: false,
     label: null,
@@ -158,7 +158,7 @@ const LOCKS = [
   {
     id: "bola-disco",
     top: 16.21,
-    left: 74.61,
+    left: 71.61,
     // Primer lote, con contraseña.
     unlocked: false,
     requiresPassword: true,
@@ -175,7 +175,7 @@ const LOCKS = [
   {
     id: "mariposa",
     top: 54.52,
-    left: 63.79,
+    left: 62,
     // Primer lote, con contraseña.
     unlocked: false,
     requiresPassword: true,
@@ -192,8 +192,8 @@ const LOCKS = [
     // confundir con el enlace de "Reservar álbum", que está más a la
     // derecha, sobre la pizarra, y no es un candado).
     id: "letrero-barra",
-    top: 57.76,
-    left: 72.81,
+    top: 57.8,
+    left: 69.6,
     unlocked: false,
     requiresPassword: false,
     label: null,
@@ -207,7 +207,7 @@ const LOCKS = [
   {
     id: "reloj-arena",
     top: 83.23,
-    left: 40.63,
+    left: 43,
     unlocked: false,
     requiresPassword: false,
     label: null,
@@ -219,9 +219,9 @@ const LOCKS = [
     },
   },
   {
-    id: "bala",
+    id: "banqueta",
     top: 81.15,
-    left: 60.34,
+    left: 59.34,
     unlocked: false,
     requiresPassword: false,
     label: null,
@@ -234,9 +234,9 @@ const LOCKS = [
     },
   },
   {
-    id: "fotos-mesa",
+    id: "bala",
     top: 88.66,
-    left: 33.49,
+    left: 36.7,
     unlocked: false,
     requiresPassword: false,
     label: null,

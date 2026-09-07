@@ -34,18 +34,14 @@ html, body {
 /* ---------- Escenario principal ---------- */
 
 #stage-wrapper {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
+  
 }
 
 #stage {
   position: relative;
   width: 100%;
-  max-width: 1920px;
-  aspect-ratio: 1920 / 1282;
+  max-width: 2261px;
+  aspect-ratio: 2261 / 1282;
   margin: 0 auto;
   overflow: hidden;
 }
@@ -112,8 +108,7 @@ html, body {
   position: absolute;
   inset: 0;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
   user-select: none;
   -webkit-user-drag: none;
@@ -122,11 +117,9 @@ html, body {
 #logo-overlay {
   position: absolute;
   top: 1.5%;
-  left: 10%;
-  width: 24%;
-  min-width: 140px;
+  left: 15.5%;
+  width: 19%;
   pointer-events: none;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
 }
 
 #registrate-btn {
@@ -141,10 +134,10 @@ html, body {
 
 #reserve-link {
   position: absolute;
-  top: 50.5%;
-  left: 80.9%;
-  width: 11.6%;
-  height: 13.5%;
+  top: 50.6%;
+  left: 76.9%;
+  width: 9.6%;
+  height: 13.3%;
   display: block;
 }
 
@@ -165,8 +158,8 @@ html, body {
 }
 
 .lock img {
-  width: clamp(22px, 3vw, 42px);
-  height: clamp(22px, 3vw, 42px);
+  width: clamp(24px, 3vw, 38px);
+  height: clamp(24px, 3vw, 38px);
   display: block;
   transition: transform 0.15s ease;
 }
@@ -251,11 +244,10 @@ html, body {
 
 #modal.napkin {
   position: relative;
-  width: 520px;
-  height: 602px;
-  /*overflow-y: auto;*/
-  background: transparent url("../assets/images/Fondo_secundarias_servilleta.png") center / 100% auto no-repeat;
-  padding: 55px 68px 60px 61px;
+  width: 740px;
+  height: 589px;
+  background: transparent url("../assets/images/servilleta_desktop.png") center / 100% auto no-repeat;
+  padding: 72px 75px 74px 70px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
 }
 #modal-body {
@@ -276,17 +268,6 @@ html, body {
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
-}
-@media (min-width: 1024px), (max-height: 600px) {
-  #modal.napkin {
-    width: 487px;
-    height: 560px;
-    padding: 50px 62px 54px 55px;
-  }
-  #modal-close {
-    top: 15px;
-    right: 25px;
-  }
 }
 
 .modal-eyebrow {
@@ -517,6 +498,6 @@ html, body {
 @media (max-width: 640px) {
   .form-grid { grid-template-columns: 1fr; }
   #modal-backdrop { padding: 0; }
-  #modal.napkin { width: 100vw; height: 115vw; padding: 10.8vw 13vw 11.1vw 11.2vw; }
-  #modal-close { top: 8px; right: 16px; }
+  #modal.napkin { background-image: url("../assets/images/servilleta_movil.png"); width: 100vw; height: 152vw; padding: 10.8vw 12.9vw 11.1vw 12.5vw; }
+  #modal-close { top: 10px; right: 14px; }
 }
