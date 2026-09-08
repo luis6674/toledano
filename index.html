@@ -340,7 +340,8 @@
             <p class="invalid-feedback">Selecciona tu país</p>
           </div>
           <div class="form-group">
-            <input id="dob_picker" name="field_dob" type="date" class="form-control" aria-label="Fecha de nacimiento" required />
+            <label class="field-label" for="dob_picker">Fecha de nacimiento *</label>
+            <input id="dob_picker" name="field_dob" type="date" class="form-control" required />
             <p class="invalid-feedback">Introduce tu fecha de nacimiento</p>
           </div>
           <div class="form-group">
@@ -379,6 +380,9 @@
         <button type="submit" class="btn-red">Acceder</button>
         <p class="form-msg" data-role="password-msg" hidden></p>
       </form>
+    </div>
+    <div class="panel panel-success" hidden>
+      <h2 class="modal-heading">Gracias por registrarte</h2>
     </div>
     <img class="modal-signature" src="assets/images/logo_seundarias.png" alt="El Toledano" />
   </template>

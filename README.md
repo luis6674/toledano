@@ -91,6 +91,22 @@ El mismo modal sirve para dos cosas distintas según desde dónde se abra
   mismo formulario de alta. Es aquí donde se le explica al usuario que
   hay que suscribirse para conseguir la contraseña.
 
+Al enviar el formulario de alta con éxito, el modal pasa a un tercer
+panel (`.panel-success`) con un simple "Gracias por registrarte"
+centrado verticalmente — ya no lleva al paso de contraseña, que ahora
+solo se pide en el candado.
+
+### Sincronización de los checkboxes de consentimiento
+
+Al marcar/desmarcar cada checkbox `mailing-list-id[0]`/`[1]` (privacidad
+/ comercial), `wireMailingListSync` en `js/app.js` refleja ese mismo
+estado en sus campos ocultos asociados
+(`ts-for-mailing-list-id[N]`/`gp-.../vp-...`), reproduciendo el
+comportamiento que Sony añadió a `form.html`. Sus ids de ejemplo
+(`#ts-for-ml-0`, etc.) no coinciden con ningún elemento real de su
+propio `form.html` ni del nuestro — probablemente un desajuste en su
+snippet — así que aquí se usan los ids completos que sí existen.
+
 ### Selector de teléfono con detección de país por IP (intl-tel-input)
 
 El campo de móvil usa [intl-tel-input](https://intl-tel-input.com/)

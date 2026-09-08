@@ -52,6 +52,7 @@
     modalBackdrop.hidden = true;
     document.body.style.overflow = "";
     modalBody.innerHTML = "";
+    modalBody.classList.remove("is-centered");
   }
 
   modalCloseBtn.addEventListener("click", closeModal);
@@ -182,10 +183,12 @@
     var tpl = document.getElementById("tpl-gate");
     var node = tpl.content.cloneNode(true);
     modalBody.innerHTML = "";
+    modalBody.classList.remove("is-centered");
     modalBody.appendChild(node);
 
     var subscribePanel = modalBody.querySelector(".panel-subscribe");
     var passwordPanel = modalBody.querySelector(".panel-password");
+    var successPanel = modalBody.querySelector(".panel-success");
     var showSubscribeBtn = modalBody.querySelector('[data-action="show-subscribe"]');
     var subscribeForm = modalBody.querySelector(".subscribe-form");
     var subscribeMsg = modalBody.querySelector('[data-role="form-msg"]');
@@ -206,9 +209,27 @@
       passwordPanel.hidden = false;
     }
 
+    wireMailingListSync(subscribeForm);
+
     var phoneInput = subscribeForm.querySelector("#field_mobile_phone");
     var countrySelect = subscribeForm.querySelector("#field_country_region");
     var phoneIti = initPhoneField(phoneInput, countrySelect);
+
+    // Al hacer click en cualquier punto del campo de fecha (no solo en el
+    // icono del calendario) se abre directamente el selector nativo.
+    var dobInput = subscribeForm.querySelector("#dob_picker");
+    if (dobInput) {
+      dobInput.addEventListener("click", function () {
+        if (typeof dobInput.showPicker === "function") {
+          try {
+            dobInput.showPicker();
+          } catch (e) {
+            // Navegador sin soporte o llamada fuera de un gesto del
+            // usuario: se ignora y el campo se comporta como siempre.
+          }
+        }
+      });
+    }
 
     subscribeForm.addEventListener("submit", function (evt) {
       evt.preventDefault();
@@ -230,7 +251,8 @@
 
       handleSubscribeSubmit(subscribeForm, subscribeMsg, function () {
         subscribePanel.hidden = true;
-        passwordPanel.hidden = false;
+        successPanel.hidden = false;
+        modalBody.classList.add("is-centered");
       });
     });
 
@@ -253,6 +275,38 @@
     });
 
     openModal();
+  }
+
+  // ---------------------------------------------------------------
+  // Checkboxes de consentimiento: sincronizar los campos ocultos
+  // "triggered_sends" / "global_participants" / "virtual_participants"
+  // de cada lista con el checkbox visible correspondiente.
+  //
+  // Reproduce el comportamiento que Sony añadió a form.html, con los ids
+  // reales de nuestro formulario (los suyos, del tipo "#ts-for-ml-0", no
+  // coinciden con ningún elemento del propio form.html ni del nuestro —
+  // probablemente un desajuste en su ejemplo — así que aquí se usan los
+  // ids completos que sí existen: "ts-for-mailing-list-id[N]", etc.).
+  // ---------------------------------------------------------------
+
+  function wireMailingListSync(form) {
+    var checkboxes = form.querySelectorAll(".mailing-list-id");
+    Array.prototype.forEach.call(checkboxes, function (checkbox) {
+      var match = checkbox.id.match(/\[(\d+)\]$/);
+      if (!match) return;
+      var index = match[1];
+      var relatedIds = [
+        "ts-for-mailing-list-id[" + index + "]",
+        "gp-for-mailing-list-id[" + index + "]",
+        "vp-for-mailing-list-id[" + index + "]",
+      ];
+      checkbox.addEventListener("change", function () {
+        relatedIds.forEach(function (id) {
+          var el = form.querySelector('[id="' + id + '"]');
+          if (el) el.checked = checkbox.checked;
+        });
+      });
+    });
   }
 
   // ---------------------------------------------------------------
@@ -351,6 +405,7 @@
     var tpl = document.getElementById("tpl-content");
     var node = tpl.content.cloneNode(true);
     modalBody.innerHTML = "";
+    modalBody.classList.remove("is-centered");
     modalBody.appendChild(node);
 
     var content = lock.content;
