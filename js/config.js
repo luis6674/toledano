@@ -30,7 +30,7 @@ const SITE_CONFIG = {
 };
 
 /**
- * Lista de candados sobre la imagen de fondo (assets/images/fondo2.jpg).
+ * Lista de candados sobre la imagen de fondo (assets/images/fondo3.jpg).
  *
  * Cada candado tiene esta forma:
  * {
@@ -39,10 +39,12 @@ const SITE_CONFIG = {
  *   left: 60.54,  // posición horizontal, en % de la anchura de la imagen
  *   unlocked: false,        // true = candado verde y clicable
  *   requiresPassword: false, // true = pide la contraseña de la newsletter
- *   label: null,             // texto que aparece sobre el candado cuando está
- *                             // desbloqueado, ej: { title: "VEN Y BÁILAME", subtitle: "DESBLOQUEADO" }
  *   content: { ... }         // lo que se muestra al pulsar el candado (ver abajo)
  * }
+ *
+ * Todo candado con "unlocked: true" muestra "content.title" + "Desbloqueado"
+ * al pasar el ratón por encima (ver .lock-label en css/style.css) — no hace
+ * falta configurar nada aparte para eso.
  *
  * Tipos de contenido soportados en "content.type":
  *   - "audio"   -> reproductor de audio (fragmento de canción / mensaje de voz)
@@ -69,7 +71,6 @@ const LOCKS = [
     left: 32.7,
     unlocked: false,
     requiresPassword: false,
-    label: null,
     content: {
       type: "text",
       title: "Nombre canción",
@@ -83,7 +84,6 @@ const LOCKS = [
     left: 41.04,
     unlocked: false,
     requiresPassword: false,
-    label: null,
     content: {
       type: "gallery",
       title: "Nombre canción",
@@ -103,7 +103,6 @@ const LOCKS = [
     // ya desbloqueado, pero pide la contraseña de la newsletter.
     unlocked: true,
     requiresPassword: true,
-    label: null,
     content: {
       type: "audio",
       title: "No sé si quiero volver",
@@ -118,7 +117,6 @@ const LOCKS = [
     left: 59.15,
     unlocked: false,
     requiresPassword: false,
-    label: null,
     content: {
       type: "audio",
       title: "Mensaje de voz",
@@ -133,7 +131,6 @@ const LOCKS = [
     left: 74.08,
     unlocked: false,
     requiresPassword: false,
-    label: null,
     content: {
       type: "gallery",
       title: "Nombre canción",
@@ -147,7 +144,6 @@ const LOCKS = [
     left: 90.8,
     unlocked: false,
     requiresPassword: false,
-    label: null,
     content: {
       type: "text",
       title: "Nombre canción",
@@ -162,7 +158,6 @@ const LOCKS = [
     // Primer lote de lanzamiento, con contraseña.
     unlocked: true,
     requiresPassword: true,
-    label: { title: "VEN Y BÁILAME", subtitle: "DESBLOQUEADO" },
     content: {
       type: "gallery",
       title: "Ven y báilame",
@@ -178,7 +173,6 @@ const LOCKS = [
     // Primer lote de lanzamiento, con contraseña.
     unlocked: true,
     requiresPassword: true,
-    label: null,
     content: {
       type: "gallery",
       title: "Mil mariposas",
@@ -196,7 +190,6 @@ const LOCKS = [
     left: 69.6,
     unlocked: false,
     requiresPassword: false,
-    label: null,
     content: {
       type: "text",
       title: "Nombre canción",
@@ -210,7 +203,6 @@ const LOCKS = [
     left: 43,
     unlocked: false,
     requiresPassword: false,
-    label: null,
     content: {
       type: "text",
       title: "Nombre canción",
@@ -224,7 +216,6 @@ const LOCKS = [
     left: 59.34,
     unlocked: false,
     requiresPassword: false,
-    label: null,
     content: {
       type: "audio",
       title: "Mensaje de voz",
@@ -239,7 +230,6 @@ const LOCKS = [
     left: 36.7,
     unlocked: false,
     requiresPassword: false,
-    label: null,
     content: {
       type: "gallery",
       title: "Nombre canción",
