@@ -470,16 +470,18 @@ html, body {
   flex-direction: column;
 }
 
-/* Solo la usa el campo de fecha de nacimiento: al ser un <input
-   type="date"> nativo no admite placeholder, así que necesita una
-   etiqueta visible aparte para dejar claro qué hay que rellenar. */
+/* Etiqueta visible sobre un campo, para los que no dejan claro qué son
+   solo con su placeholder: el desplegable de país (su placeholder es la
+   primera opción, "- País * -", que desaparece en cuanto se elige algo)
+   y la fecha de nacimiento (un <input type="date"> nativo ni siquiera
+   admite placeholder). */
 .field-label {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--ink);
-  opacity: 0.65;
+  opacity: 0.8;
   margin: 0 0 4px;
 }
 
