@@ -186,19 +186,40 @@
 
     var subscribePanel = modalBody.querySelector(".panel-subscribe");
     var passwordPanel = modalBody.querySelector(".panel-password");
-    var showPasswordBtn = modalBody.querySelector('[data-action="show-password"]');
+    var showSubscribeBtn = modalBody.querySelector('[data-action="show-subscribe"]');
     var subscribeForm = modalBody.querySelector(".subscribe-form");
     var subscribeMsg = modalBody.querySelector('[data-role="form-msg"]');
     var passwordForm = modalBody.querySelector(".password-form");
     var passwordMsg = modalBody.querySelector('[data-role="password-msg"]');
 
-    showPasswordBtn.addEventListener("click", function () {
+    showSubscribeBtn.addEventListener("click", function () {
+      passwordPanel.hidden = true;
+      subscribePanel.hidden = false;
+    });
+
+    // Al pulsar "Regístrate" (pendingLock nulo) se ve directamente el
+    // formulario de alta. Al pulsar un candado protegido por contraseña
+    // (pendingLock presente) se ve directamente el paso de contraseña,
+    // con un enlace para ir a suscribirse si todavía no se tiene.
+    if (pendingLock) {
       subscribePanel.hidden = true;
       passwordPanel.hidden = false;
-    });
+    }
+
+    var phoneInput = subscribeForm.querySelector("#field_mobile_phone");
+    var countrySelect = subscribeForm.querySelector("#field_country_region");
+    var phoneIti = initPhoneField(phoneInput, countrySelect);
 
     subscribeForm.addEventListener("submit", function (evt) {
       evt.preventDefault();
+
+      // Sustituye lo que haya escrito el usuario por el número completo en
+      // formato internacional (+34...) que calcula intl-tel-input, para que
+      // sea eso lo que se envíe en field_mobile_phone.
+      if (phoneIti && phoneInput.value.trim()) {
+        var internationalNumber = phoneIti.getNumber();
+        if (internationalNumber) phoneInput.value = internationalNumber;
+      }
 
       if (!subscribeForm.checkValidity()) {
         subscribeForm.classList.add("was-validated");
@@ -232,6 +253,53 @@
     });
 
     openModal();
+  }
+
+  // ---------------------------------------------------------------
+  // Teléfono: intl-tel-input, con detección de país por IP
+  // ---------------------------------------------------------------
+
+  // Servicio gratuito y sin clave para averiguar el país a partir de la IP
+  // del visitante. Si falla (red, timeout, bloqueado...) se usa "es" como
+  // valor por defecto, ya que el público de este sitio es mayoritariamente
+  // de España.
+  function geoIpCountryLookup() {
+    return fetch("https://get.geojs.io/v1/ip/country.json")
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (data) {
+        return (data && data.country ? data.country : "ES").toLowerCase();
+      })
+      .catch(function () {
+        return "es";
+      });
+  }
+
+  function initPhoneField(phoneInput, countrySelect) {
+    if (!phoneInput || typeof window.intlTelInput !== "function") return null;
+
+    var iti = window.intlTelInput(phoneInput, {
+      // Sin "initialCountry": así intl-tel-input espera a
+      // initialCountryLookup en vez de ignorarlo.
+      initialCountryLookup: geoIpCountryLookup,
+      separateDialCode: true,
+    });
+
+    // Cuando se detecta (o el usuario cambia) el país del teléfono,
+    // seleccionamos el mismo país en el desplegable "field_country_region"
+    // de Sony, si existe como opción.
+    phoneInput.addEventListener("countrychange", function (evt) {
+      var country = evt.detail;
+      if (!country || !country.iso2 || !countrySelect) return;
+      var iso2Upper = country.iso2.toUpperCase();
+      var hasOption = Array.prototype.some.call(countrySelect.options, function (opt) {
+        return opt.value === iso2Upper;
+      });
+      if (hasOption) countrySelect.value = iso2Upper;
+    });
+
+    return iti;
   }
 
   function handleSubscribeSubmit(form, msgEl, onSuccess) {
