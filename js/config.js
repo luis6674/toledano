@@ -30,7 +30,7 @@ const SITE_CONFIG = {
 };
 
 /**
- * Lista de candados sobre la imagen de fondo (assets/images/fondo.jpg).
+ * Lista de candados sobre la imagen de fondo (assets/images/fondo2.jpg).
  *
  * Cada candado tiene esta forma:
  * {
@@ -53,7 +53,8 @@ const SITE_CONFIG = {
  * Todos los tipos admiten: title, eyebrow (texto pequeño superior),
  * description.
  *   - audio/video admiten además: src, poster (solo vídeo)
- *   - gallery admite además: images: [{ src, alt }]
+ *   - gallery admite además: images: [{ src, alt }] (y, opcionalmente,
+ *     description, que se muestra como pie de foto)
  *   - text admite además: body (puede tener saltos de línea con \n)
  *
  * IMPORTANTE: mientras un candado tenga "unlocked: false" da igual lo que
@@ -88,9 +89,9 @@ const LOCKS = [
       title: "Nombre canción",
       eyebrow: "Recuerdo desbloqueado",
       images: [
-        { src: "assets/images/fondo.jpg", alt: "Foto de recuerdo 1" },
-        { src: "assets/images/fondo.jpg", alt: "Foto de recuerdo 2" },
-        { src: "assets/images/fondo.jpg", alt: "Foto de recuerdo 3" },
+        { src: "assets/images/sample.jpg", alt: "Foto de recuerdo 1" },
+        { src: "assets/images/sample.jpg", alt: "Foto de recuerdo 2" },
+        { src: "assets/images/sample.jpg", alt: "Foto de recuerdo 3" },
       ],
     },
   },
@@ -98,17 +99,17 @@ const LOCKS = [
     id: "puerta",
     top: 39.5,
     left: 51.3,
-    // Este candado forma parte del primer lote (junto con "bola-disco" y
-    // "mariposa"): se desbloquea con la contraseña de la newsletter.
-    unlocked: false,
+    // Primer lote de lanzamiento (junto con "bola-disco" y "mariposa"):
+    // ya desbloqueado, pero pide la contraseña de la newsletter.
+    unlocked: true,
     requiresPassword: true,
     label: null,
     content: {
       type: "audio",
-      title: "Nombre canción",
+      title: "No sé si quiero volver",
       eyebrow: "Recuerdo desbloqueado",
-      src: "",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      src: "assets/audio/sample-12s.mp3",
+      description: "Esta es una nota de voz grabada por El Toledano sobre el tema 'No sé si quiero volver'.",
     },
   },
   {
@@ -137,7 +138,7 @@ const LOCKS = [
       type: "gallery",
       title: "Nombre canción",
       eyebrow: "Recuerdo desbloqueado",
-      images: [{ src: "assets/images/fondo.jpg", alt: "Foto de recuerdo" }],
+      images: [{ src: "assets/images/sample.jpg", alt: "Foto de recuerdo" }],
     },
   },
   {
@@ -158,32 +159,32 @@ const LOCKS = [
     id: "bola-disco",
     top: 16.21,
     left: 71.61,
-    // Primer lote, con contraseña.
-    unlocked: false,
+    // Primer lote de lanzamiento, con contraseña.
+    unlocked: true,
     requiresPassword: true,
     label: { title: "VEN Y BÁILAME", subtitle: "DESBLOQUEADO" },
     content: {
-      type: "video",
-      title: "Nombre canción",
+      type: "gallery",
+      title: "Ven y báilame",
       eyebrow: "Recuerdo desbloqueado",
-      src: "",
-      poster: "",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      images: [{ src: "assets/images/toledano01.jpg", alt: "Foto inédita de Guille Toledano" }],
+      description: "Foto inédita para celebrar este nuevo tema 'Ven y báilame'.",
     },
   },
   {
     id: "mariposa",
     top: 54.52,
     left: 62,
-    // Primer lote, con contraseña.
-    unlocked: false,
+    // Primer lote de lanzamiento, con contraseña.
+    unlocked: true,
     requiresPassword: true,
     label: null,
     content: {
       type: "gallery",
-      title: "Nombre canción",
+      title: "Mil mariposas",
       eyebrow: "Recuerdo desbloqueado",
-      images: [{ src: "assets/images/fondo.jpg", alt: "Foto de recuerdo" }],
+      images: [{ src: "assets/images/sample.jpg", alt: "Foto de El Toledano con su madre" }],
+      description: "Foto con mi madre.",
     },
   },
   {
@@ -243,7 +244,7 @@ const LOCKS = [
       type: "gallery",
       title: "Nombre canción",
       eyebrow: "Recuerdo desbloqueado",
-      images: [{ src: "assets/images/fondo.jpg", alt: "Foto de recuerdo" }],
+      images: [{ src: "assets/images/sample.jpg", alt: "Foto de recuerdo" }],
     },
   },
 ];

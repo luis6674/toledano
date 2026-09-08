@@ -372,15 +372,16 @@
     <div class="panel panel-password" hidden>
       <h2 class="modal-heading">Contraseña</h2>
       <p class="gate-copy">Introduce la contraseña que recibiste en el email de bienvenida.</p>
-      <p class="gate-switch">
-        ¿No tienes la contraseña?
-        <button type="button" class="link-btn" data-action="show-subscribe">Suscríbete para conseguirla</button>
-      </p>
       <form class="password-form" novalidate>
         <input type="password" name="password" placeholder="CONTRASEÑA" required autocomplete="off" />
         <button type="submit" class="btn-red">Acceder</button>
         <p class="form-msg" data-role="password-msg" hidden></p>
       </form>
+      <p class="gate-switch">
+        Si aún no tienes la contraseña,
+        <button type="button" class="link-btn" data-action="show-subscribe">regístrate</button>
+        en la lista de correo para obtenerla.
+      </p>
     </div>
     <div class="panel panel-success" hidden>
       <h2 class="modal-heading">Gracias por registrarte</h2>

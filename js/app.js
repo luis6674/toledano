@@ -426,7 +426,11 @@
         break;
       case "gallery":
         mediaEl.appendChild(buildGallery(content.images || []));
-        descriptionEl.remove();
+        if (content.description) {
+          descriptionEl.textContent = content.description;
+        } else {
+          descriptionEl.remove();
+        }
         break;
       case "text":
         var p = document.createElement("p");
