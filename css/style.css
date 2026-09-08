@@ -474,6 +474,17 @@ html, body {
 
 .form-grid input::placeholder { color: #cfcfcf; }
 
+/* El input de fecha nativo pinta su icono de calendario en negro por
+   defecto, invisible sobre el fondo oscuro del campo. */
+.form-grid input[type="date"] {
+  color-scheme: dark;
+}
+
+.form-grid input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
 .invalid-feedback {
   display: none;
   color: var(--red);
