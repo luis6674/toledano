@@ -450,8 +450,18 @@ html, body {
   gap: 10px;
 }
 
-.form-grid input {
+.hidden-field {
+  display: none;
+}
+
+.form-group {
   grid-column: span 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-grid input,
+.form-grid select {
   padding: 12px 10px;
   border: 0;
   background: var(--ink);
@@ -459,9 +469,30 @@ html, body {
   font-weight: 700;
   font-size: 14px;
   letter-spacing: 0.03em;
+  width: 100%;
 }
 
 .form-grid input::placeholder { color: #cfcfcf; }
+
+.invalid-feedback {
+  display: none;
+  color: var(--red);
+  font-size: 12px;
+  font-weight: 700;
+  margin: 4px 2px 0;
+  text-align: left;
+}
+
+.was-validated .form-group input:invalid ~ .invalid-feedback,
+.was-validated .form-group select:invalid ~ .invalid-feedback {
+  display: block;
+}
+
+.form-group-footnote {
+  font-size: 12px;
+  opacity: 0.7;
+  margin: 14px 0 0;
+}
 
 .btn-red {
   grid-column: span 1;
@@ -485,6 +516,10 @@ html, body {
 }
 
 .checkbox-line input { margin-top: 3px; }
+
+.was-validated .checkbox-line input:invalid {
+  outline: 2px solid var(--red);
+}
 
 .form-msg {
   font-size: 14px;
