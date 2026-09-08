@@ -50,14 +50,33 @@ definitiva de reservas/preventa, basta con cambiar ese valor. Si algún día
 `reserveUrl` estuviera vacío, el visitante ve un aviso de "disponible
 próximamente" en vez de un enlace roto.
 
-### Formulario de alta en la newsletter (Sony Music)
+### Formulario de alta en la newsletter (Sony Music Fans)
 
-El formulario "Regístrate" todavía no tiene destino: Sony Music aún tiene
-que facilitar el endpoint de alta. En cuanto exista, se pega la URL en
-`SITE_CONFIG.subscribeEndpoint` (dentro de `js/config.js`) y el formulario
-empezará a enviarle los datos por `fetch` (JSON, método `POST`). Hasta
-entonces, el botón "¿Ya tienes la contraseña? Introdúcela aquí" permite
-seguir probando el resto del flujo sin depender del formulario.
+El formulario "Regístrate" está integrado con el endpoint real de Sony
+Music Fans (`https://subs.sonymusicfans.com/submit`, en
+`SITE_CONFIG.subscribeEndpoint`), a partir del `form.html` que facilitó
+Sony. Los campos, ids y checkboxes ocultos (`js_url`, `form`,
+`mailing-list-id[0]`/`[1]`, `triggered_sends[]`, etc.) del formulario en
+`index.html` (`<template id="tpl-gate">`) son exactamente los que espera
+ese endpoint — **no cambiar esos `name`/`id`/`value` al retocar el
+diseño**, solo el CSS o los textos visibles (placeholders, copy).
+
+El envío (`handleSubscribeSubmit` en `js/app.js`) construye el `POST`
+con `FormData`/`URLSearchParams` igual que el `$(this).serialize()` del
+ejemplo de Sony, así que cualquier campo que se añada al formulario con
+un `name` se incluye automáticamente. Antes de enviar se valida el
+formulario con la API nativa (`checkValidity()`), mostrando los mensajes
+en español de cada `.invalid-feedback`.
+
+Si algún día hay que desactivar temporalmente el envío, basta con poner
+`SITE_CONFIG.subscribeEndpoint` a `null`: el formulario avisará de que la
+suscripción no está activa, y el botón "¿Ya tienes la contraseña?
+Introdúcela aquí" seguirá permitiendo probar el resto del flujo.
+
+**Importante:** el envío real a `subs.sonymusicfans.com` no se ha podido
+probar de extremo a extremo desde este entorno de desarrollo (llamada
+cross-origin a un servidor de Sony); conviene verificarlo una vez
+desplegado en el dominio final.
 
 ## Estructura del proyecto
 

@@ -16,13 +16,12 @@ const SITE_CONFIG = {
   // Solo protege los candados marcados con "requiresPassword: true".
   password: "eltoledano",
 
-  // URL del formulario de alta de Sony Music (aún no disponible).
-  // En cuanto Sony lo facilite, se pega aquí y el formulario de
-  // suscripción empezará a enviar los datos automáticamente.
-  // Mientras sea `null`, el formulario avisa de que la suscripción
-  // todavía no está activa, pero se puede seguir probando el acceso
-  // con contraseña ("¿Ya tienes la contraseña?").
-  subscribeEndpoint: null,
+  // Endpoint real de alta en la newsletter de Sony Music Fans (SMF), tal
+  // cual lo facilitó Sony en form.html. Si algún día hay que desactivar
+  // temporalmente el envío, poner esto a `null`: el formulario avisará de
+  // que la suscripción no está activa, pero se podrá seguir probando el
+  // acceso con contraseña ("¿Ya tienes la contraseña?").
+  subscribeEndpoint: "https://subs.sonymusicfans.com/submit",
 
   // URL de "reservar/comprar el álbum". No es un candado: es un enlace
   // externo siempre visible, colocado sobre la pizarra "RESERVAS ABIERTAS"

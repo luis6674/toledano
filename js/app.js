@@ -199,6 +199,14 @@
 
     subscribeForm.addEventListener("submit", function (evt) {
       evt.preventDefault();
+
+      if (!subscribeForm.checkValidity()) {
+        subscribeForm.classList.add("was-validated");
+        var firstInvalid = subscribeForm.querySelector(":invalid");
+        if (firstInvalid) firstInvalid.focus();
+        return;
+      }
+
       handleSubscribeSubmit(subscribeForm, subscribeMsg, function () {
         subscribePanel.hidden = true;
         passwordPanel.hidden = false;
@@ -227,29 +235,11 @@
   }
 
   function handleSubscribeSubmit(form, msgEl, onSuccess) {
-    var data = {
-      nombre: form.elements.nombre.value.trim(),
-      apellidos: form.elements.apellidos.value.trim(),
-      email: form.elements.email.value.trim(),
-      ciudad: form.elements.ciudad.value.trim(),
-      provincia: form.elements.provincia.value.trim(),
-      pais: form.elements.pais.value.trim(),
-      fecha_nacimiento: form.elements.fecha_nacimiento.value,
-      consentimiento_privacidad: form.elements.consentimiento_privacidad.checked,
-      consentimiento_comercial: form.elements.consentimiento_comercial.checked,
-    };
-
-    if (!data.nombre || !data.apellidos || !data.email || !data.consentimiento_privacidad) {
-      msgEl.hidden = false;
-      msgEl.className = "form-msg is-error";
-      msgEl.textContent = "Completa los campos obligatorios y acepta la política de privacidad.";
-      return;
-    }
-
     if (!SITE_CONFIG.subscribeEndpoint) {
-      // El formulario de alta de Sony Music todavía no está disponible.
-      // Dejamos avanzar igualmente al paso de contraseña para poder
-      // seguir probando el resto del flujo mientras se integra.
+      // El formulario de alta de Sony Music está desactivado temporalmente
+      // (SITE_CONFIG.subscribeEndpoint a null). Dejamos avanzar igualmente
+      // al paso de contraseña para poder seguir probando el resto del
+      // flujo mientras tanto.
       msgEl.hidden = false;
       msgEl.className = "form-msg is-error";
       msgEl.textContent =
@@ -261,10 +251,17 @@
     msgEl.className = "form-msg";
     msgEl.textContent = "Enviando...";
 
+    // Igual que hace el ejemplo de Sony (form.html) con $(this).serialize():
+    // se envía como application/x-www-form-urlencoded, con los mismos
+    // nombres de campo que espera subs.sonymusicfans.com. FormData ya
+    // excluye los checkboxes no marcados, igual que serialize().
+    var body = new URLSearchParams(new FormData(form));
+
     fetch(SITE_CONFIG.subscribeEndpoint, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: body,
+      mode: "cors",
+      credentials: "omit",
     })
       .then(function (res) {
         if (!res.ok) throw new Error("bad-response");
@@ -274,7 +271,7 @@
       })
       .catch(function () {
         msgEl.className = "form-msg is-error";
-        msgEl.textContent = "No se ha podido completar el registro. Inténtalo de nuevo más tarde.";
+        msgEl.textContent = "Ha ocurrido un error. Por favor, inténtalo más tarde.";
       });
   }
 
