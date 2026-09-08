@@ -191,6 +191,15 @@ html, body {
   text-align: center;
   line-height: 1.15;
   white-space: nowrap;
+  font-family: "Bebas Neue", Arial, sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.lock:hover .lock-label,
+.lock:focus-visible .lock-label {
+  opacity: 1;
 }
 
 .lock-label .lock-title {
@@ -214,11 +223,33 @@ html, body {
 #site-footer {
   background: #000;
   color: #999;
-  text-align: center;
-  padding: 18px 20px;
-  font-size: 12px;
-  line-height: 1.7;
-  font-family: "Helvetica Neue", Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  padding: 18px 24px;
+}
+
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.footer-logos img {
+  display: block;
+  height: 38px;
+  width: auto;
+}
+
+.footer-links {
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 #site-footer a {
@@ -274,7 +305,7 @@ html, body {
   position: relative;
   width: 740px;
   height: 589px;
-  background: transparent url("../assets/images/servilleta_desktop.png") center / 100% auto no-repeat;
+  background: transparent url("../assets/images/servilleta_desktop2.png") center / 100% auto no-repeat;
   padding: 72px 75px 74px 70px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
 }
@@ -338,7 +369,7 @@ html, body {
 .modal-signature {
   display: block;
   margin: 28px auto 0;
-  width: 110px;
+  width: 125px;
 }
 
 .modal-media { width: 90%; margin: 20px auto; }
@@ -441,7 +472,7 @@ html, body {
 
 .gate-switch {
   text-align: center;
-  font-size: 14px;
+  font-size: 15px;
   margin: 20px 0 20px;
 }
 
@@ -453,6 +484,7 @@ html, body {
   text-decoration: underline;
   cursor: pointer;
   padding: 0;
+  font-family: inherit;
   font-size: inherit;
 }
 
@@ -594,7 +626,7 @@ html, body {
 }
 
 .gate-copy {
-  font-size: 14px;
+  font-size: 15px;
   margin-bottom: 16px;
 }
 

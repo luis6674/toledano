@@ -122,19 +122,20 @@
     setLockIcon(img, lock);
     btn.appendChild(img);
 
-    if (lock.unlocked && lock.label) {
+    // Todo candado desbloqueado muestra su título + "Desbloqueado" al
+    // pasar el ratón por encima (ver CSS: .lock-label solo es visible en
+    // :hover/:focus-visible).
+    if (lock.unlocked && lock.content.title) {
       var labelWrap = document.createElement("span");
       labelWrap.className = "lock-label";
       var titleEl = document.createElement("span");
       titleEl.className = "lock-title";
-      titleEl.textContent = lock.label.title || "";
+      titleEl.textContent = lock.content.title;
+      var subtitleEl = document.createElement("span");
+      subtitleEl.className = "lock-subtitle";
+      subtitleEl.textContent = "Desbloqueado";
       labelWrap.appendChild(titleEl);
-      if (lock.label.subtitle) {
-        var subtitleEl = document.createElement("span");
-        subtitleEl.className = "lock-subtitle";
-        subtitleEl.textContent = lock.label.subtitle;
-        labelWrap.appendChild(subtitleEl);
-      }
+      labelWrap.appendChild(subtitleEl);
       btn.insertBefore(labelWrap, img);
     }
 
