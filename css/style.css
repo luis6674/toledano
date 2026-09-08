@@ -344,7 +344,7 @@ html, body {
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 0.04em;
-  margin: 20px 0 4px;
+  margin: 0px 0 4px;
   font-size: 20px;
 }
 
@@ -353,15 +353,15 @@ html, body {
   text-transform: uppercase;
   font-family: "Bebas Neue", Arial, sans-serif;
   font-weight: 400;
-  font-size: clamp(24px, 4vw, 40px);
-  margin: 0 0 8px;
+  font-size: clamp(32px, 4vw, 48px);
+  margin: 0 0 0px;
   letter-spacing: 0.01em;
 }
 
 .modal-description {
   text-align: center;
   font-size: 18px;
-  line-height: 1.5;
+  line-height: 1.4;
   max-width: 76ch;
   margin: 16px auto 0;
 }
@@ -653,5 +653,5 @@ html, body {
   #modal-backdrop { padding: 0; }
   #modal.napkin { background-image: url("../assets/images/servilleta_movil.png"); width: 100vw; height: 152vw; padding: 10.8vw 12.9vw 11.1vw 12.5vw; }
   #modal-close { top: 10px; right: 14px; }
-  .modal-eyebrow { margin: 10px 0 4px; font-size: 18px; }
+  .modal-eyebrow { font-size: 18px; }
 }
