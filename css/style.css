@@ -474,6 +474,27 @@ html, body {
 
 .form-grid input::placeholder { color: #cfcfcf; }
 
+/* Selector de país/prefijo de intl-tel-input sobre el campo de móvil:
+   por defecto pinta la flechita en gris oscuro, invisible sobre el fondo
+   oscuro del campo. */
+.form-grid .iti {
+  display: block;
+  width: 100%;
+  --iti-icon-color: #ccc;
+  --iti-border-color: #444;
+}
+
+/* El input de fecha nativo pinta su icono de calendario en negro por
+   defecto, invisible sobre el fondo oscuro del campo. */
+.form-grid input[type="date"] {
+  color-scheme: dark;
+}
+
+.form-grid input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
 .invalid-feedback {
   display: none;
   color: var(--red);
@@ -485,6 +506,12 @@ html, body {
 
 .was-validated .form-group input:invalid ~ .invalid-feedback,
 .was-validated .form-group select:invalid ~ .invalid-feedback {
+  display: block;
+}
+
+/* El campo de móvil queda envuelto por intl-tel-input en un div.iti, así
+   que ya no es hermano directo de su .invalid-feedback. */
+.was-validated .form-group:has(.iti input:invalid) .invalid-feedback {
   display: block;
 }
 
@@ -516,6 +543,10 @@ html, body {
 }
 
 .checkbox-line input { margin-top: 3px; }
+
+.checkbox-line a {
+  color: var(--red);
+}
 
 .was-validated .checkbox-line input:invalid {
   outline: 2px solid var(--red);

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>El Toledano | Guillermo Toledano</title>
   <meta name="description" content="El Toledano: 10 historias, 10 canciones, el lugar donde todo empezó." />
+  <link rel="stylesheet" href="assets/vendor/intl-tel-input/css/intlTelInput.min.css" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -49,10 +50,6 @@
   <template id="tpl-gate">
     <div class="panel panel-subscribe">
       <h2 class="modal-heading">Regístrate</h2>
-      <p class="gate-switch">
-        ¿Ya tienes la contraseña?
-        <button type="button" class="link-btn" data-action="show-password">Introdúcela aquí</button>
-      </p>
       <!--
         Formulario de alta en la newsletter de Sony Music Fans (SMF).
         Los nombres/ids/values de los campos y checkboxes de aquí abajo son
@@ -343,11 +340,11 @@
             <p class="invalid-feedback">Selecciona tu país</p>
           </div>
           <div class="form-group">
-            <input id="dob_picker" name="field_dob" type="text" maxlength="10" class="form-control" placeholder="NACIMIENTO (DD/MM/AAAA) *" required />
+            <input id="dob_picker" name="field_dob" type="date" class="form-control" aria-label="Fecha de nacimiento" required />
             <p class="invalid-feedback">Introduce tu fecha de nacimiento</p>
           </div>
           <div class="form-group">
-            <input class="form-control" id="phone" name="phone" type="tel" placeholder="MÓVIL *" aria-label="Móvil" required />
+            <input class="form-control" id="field_mobile_phone" name="field_mobile_phone" type="tel" placeholder="MÓVIL *" aria-label="Móvil" required />
             <p class="invalid-feedback">Introduce tu teléfono móvil</p>
           </div>
           <button type="submit" class="btn-red">Suscríbete</button>
@@ -373,6 +370,10 @@
     <div class="panel panel-password" hidden>
       <h2 class="modal-heading">Contraseña</h2>
       <p class="gate-copy">Introduce la contraseña que recibiste en el email de bienvenida.</p>
+      <p class="gate-switch">
+        ¿No tienes la contraseña?
+        <button type="button" class="link-btn" data-action="show-subscribe">Suscríbete para conseguirla</button>
+      </p>
       <form class="password-form" novalidate>
         <input type="password" name="password" placeholder="CONTRASEÑA" required autocomplete="off" />
         <button type="submit" class="btn-red">Acceder</button>
@@ -390,6 +391,7 @@
     <img class="modal-signature" src="assets/images/logo_seundarias.png" alt="El Toledano" />
   </template>
 
+  <script src="assets/vendor/intl-tel-input/js/intlTelInputWithUtils.min.js"></script>
   <script src="js/config.js"></script>
   <script src="js/app.js"></script>
 </body>

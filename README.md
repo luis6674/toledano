@@ -70,13 +70,51 @@ en español de cada `.invalid-feedback`.
 
 Si algún día hay que desactivar temporalmente el envío, basta con poner
 `SITE_CONFIG.subscribeEndpoint` a `null`: el formulario avisará de que la
-suscripción no está activa, y el botón "¿Ya tienes la contraseña?
-Introdúcela aquí" seguirá permitiendo probar el resto del flujo.
+suscripción no está activa.
 
 **Importante:** el envío real a `subs.sonymusicfans.com` no se ha podido
 probar de extremo a extremo desde este entorno de desarrollo (llamada
 cross-origin a un servidor de Sony); conviene verificarlo una vez
 desplegado en el dominio final.
+
+### Los dos puntos de entrada al modal de "candado" (`tpl-gate`)
+
+El mismo modal sirve para dos cosas distintas según desde dónde se abra
+(`openSubscribeGate` en `js/app.js`):
+
+- Botón **"Regístrate"** del fondo → se abre directamente en el
+  formulario de alta (sin ninguna mención a la contraseña: aquí solo se
+  capta el email).
+- Un **candado que requiere contraseña** (`requiresPassword: true`) → se
+  abre directamente en el paso "Introduce la contraseña", con un enlace
+  "¿No tienes la contraseña? Suscríbete para conseguirla" que lleva al
+  mismo formulario de alta. Es aquí donde se le explica al usuario que
+  hay que suscribirse para conseguir la contraseña.
+
+### Selector de teléfono con detección de país por IP (intl-tel-input)
+
+El campo de móvil usa [intl-tel-input](https://intl-tel-input.com/)
+(vendorizado en `assets/vendor/intl-tel-input/`, sin depender de ningún
+CDN) para mostrar el selector de país/prefijo con banderas. Al cargar el
+formulario intenta detectar el país del visitante por IP (servicio
+gratuito y sin clave `https://get.geojs.io/v1/ip/country.json`,
+ver `geoIpCountryLookup` en `js/app.js`) y, con eso:
+
+1. Preselecciona el país/prefijo en el propio campo de teléfono.
+2. Sincroniza automáticamente el desplegable `field_country_region` con
+   ese mismo país (si falla la detección, no se toca el desplegable).
+
+Si la detección por IP falla o tarda demasiado, se usa "ES" como país
+por defecto (tanto en el teléfono como intentando en el desplegable),
+ya que el público de este sitio es mayoritariamente de España. Al enviar
+el formulario, el número que se manda a Sony en `field_mobile_phone` es
+siempre el formato internacional completo (p. ej. `+34600123456`),
+independientemente de cómo lo haya tecleado el usuario.
+
+**Importante:** al igual que con el envío a Sony, la llamada a
+`get.geojs.io` no se ha podido probar de extremo a extremo desde este
+entorno de desarrollo; conviene verificar la detección automática de
+país una vez desplegado.
 
 ## Estructura del proyecto
 
