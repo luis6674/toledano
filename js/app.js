@@ -10,6 +10,7 @@
   var modal = document.getElementById("modal");
   var modalBody = document.getElementById("modal-body");
   var modalCloseBtn = document.getElementById("modal-close");
+  var modalHint = document.getElementById("modal-hint");
 
   var PASSWORD_KEY = "elToledano_passwordVerified";
 
@@ -53,6 +54,8 @@
     document.body.style.overflow = "";
     modalBody.innerHTML = "";
     modalBody.classList.remove("is-centered");
+    modalHint.hidden = true;
+    modalHint.textContent = "";
   }
 
   modalCloseBtn.addEventListener("click", closeModal);
@@ -60,7 +63,9 @@
     if (evt.target === modalBackdrop) closeModal();
   });
   document.addEventListener("keydown", function (evt) {
-    if (evt.key === "Escape" && !modalBackdrop.hidden) closeModal();
+    // Si el visor de fotos está abierto, es su propio listener el que
+    // debe gestionar Escape (para cerrar solo el visor, no todo el modal).
+    if (evt.key === "Escape" && !modalBackdrop.hidden && lightbox.hidden) closeModal();
   });
 
   // ---------------------------------------------------------------
@@ -416,6 +421,9 @@
     var mediaEl = modalBody.querySelector('[data-role="media"]');
     var descriptionEl = modalBody.querySelector('[data-role="description"]');
 
+    modalHint.hidden = true;
+    modalHint.textContent = "";
+
     switch (content.type) {
       case "audio":
         mediaEl.appendChild(buildAudioPlayer(content.src));
@@ -431,6 +439,10 @@
           descriptionEl.textContent = content.description;
         } else {
           descriptionEl.remove();
+        }
+        if ((content.images || []).length > 0) {
+          modalHint.textContent = "Haz click en las fotos para ampliar";
+          modalHint.hidden = false;
         }
         break;
       case "text":
@@ -518,29 +530,74 @@
     return video;
   }
 
+  // Posiciones/rotaciones fijas para el "collage" de fotos superpuestas
+  // (se repiten en bucle si hay más fotos que posiciones definidas).
+  var COLLAGE_POSITIONS = [
+    { left: "38%", top: "42%", rot: -6 },
+    { left: "62%", top: "56%", rot: 5 },
+    { left: "48%", top: "66%", rot: -3 },
+    { left: "68%", top: "38%", rot: 7 },
+    { left: "30%", top: "60%", rot: 3 },
+    { left: "56%", top: "34%", rot: -8 },
+  ];
+
   function buildGallery(images) {
     var wrap = document.createElement("div");
 
-    var grid = document.createElement("div");
-    grid.className = "gallery-grid";
+    if (images.length > 1) {
+      wrap.appendChild(buildCollage(images));
+    } else if (images.length === 1) {
+      var grid = document.createElement("div");
+      grid.className = "gallery-grid";
+      var img = document.createElement("img");
+      img.src = images[0].src;
+      img.alt = images[0].alt || "";
+      img.addEventListener("click", function () {
+        openLightbox(images, 0);
+      });
+      grid.appendChild(img);
+      wrap.appendChild(grid);
+    }
 
-    images.forEach(function (image) {
+    return wrap;
+  }
+
+  // Varias fotos: en vez de una rejilla, se apilan como un collage de
+  // postales (superpuestas, giradas y con un trocito de cinta), como en
+  // el mockup. Al pulsar en cualquier punto del collage se abre la
+  // primera foto en el visor grande, desde donde se navega con
+  // izquierda/derecha entre todas.
+  function buildCollage(images) {
+    var collage = document.createElement("div");
+    collage.className = "gallery-collage";
+
+    images.forEach(function (image, index) {
+      var pos = COLLAGE_POSITIONS[index % COLLAGE_POSITIONS.length];
+
+      var item = document.createElement("div");
+      item.className = "collage-item";
+      item.style.left = pos.left;
+      item.style.top = pos.top;
+      item.style.setProperty("--rot", pos.rot + "deg");
+      item.style.zIndex = String(index + 1);
+
+      var tape = document.createElement("span");
+      tape.className = "collage-tape";
+      item.appendChild(tape);
+
       var img = document.createElement("img");
       img.src = image.src;
       img.alt = image.alt || "";
-      img.addEventListener("click", function () {
-        openLightbox(image.src, image.alt || "");
-      });
-      grid.appendChild(img);
+      item.appendChild(img);
+
+      collage.appendChild(item);
     });
 
-    var hint = document.createElement("p");
-    hint.className = "gallery-hint";
-    hint.textContent = "Haz click en las fotos para ampliar";
+    collage.addEventListener("click", function () {
+      openLightbox(images, 0);
+    });
 
-    wrap.appendChild(grid);
-    wrap.appendChild(hint);
-    return wrap;
+    return collage;
   }
 
   function formatTime(seconds) {
@@ -551,25 +608,70 @@
   }
 
   // ---------------------------------------------------------------
-  // Lightbox para la galería
+  // Lightbox para la galería: foto grande, con navegación
+  // izquierda/derecha cuando hay más de una.
   // ---------------------------------------------------------------
 
-  var lightbox = document.createElement("div");
-  lightbox.id = "lightbox";
-  lightbox.hidden = true;
-  var lightboxImg = document.createElement("img");
-  lightbox.appendChild(lightboxImg);
-  document.body.appendChild(lightbox);
+  var lightbox = document.getElementById("lightbox");
+  var lightboxImg = document.getElementById("lightbox-img");
+  var lightboxPrevBtn = document.getElementById("lightbox-prev");
+  var lightboxNextBtn = document.getElementById("lightbox-next");
 
-  function openLightbox(src, alt) {
-    lightboxImg.src = src;
-    lightboxImg.alt = alt;
+  var lightboxImages = [];
+  var lightboxIndex = 0;
+
+  function openLightbox(images, startIndex) {
+    lightboxImages = images;
+    lightboxIndex = startIndex || 0;
+    renderLightboxImage();
     lightbox.hidden = false;
   }
 
-  lightbox.addEventListener("click", function () {
+  function closeLightbox() {
     lightbox.hidden = true;
     lightboxImg.src = "";
+    lightboxImages = [];
+  }
+
+  function renderLightboxImage() {
+    var image = lightboxImages[lightboxIndex];
+    if (!image) return;
+    lightboxImg.src = image.src;
+    lightboxImg.alt = image.alt || "";
+    var hasMultiple = lightboxImages.length > 1;
+    lightboxPrevBtn.hidden = !hasMultiple;
+    lightboxNextBtn.hidden = !hasMultiple;
+  }
+
+  function showPrevImage() {
+    lightboxIndex = (lightboxIndex - 1 + lightboxImages.length) % lightboxImages.length;
+    renderLightboxImage();
+  }
+
+  function showNextImage() {
+    lightboxIndex = (lightboxIndex + 1) % lightboxImages.length;
+    renderLightboxImage();
+  }
+
+  lightbox.addEventListener("click", function (evt) {
+    if (evt.target === lightbox || evt.target === lightboxImg) closeLightbox();
+  });
+
+  lightboxPrevBtn.addEventListener("click", function (evt) {
+    evt.stopPropagation();
+    showPrevImage();
+  });
+
+  lightboxNextBtn.addEventListener("click", function (evt) {
+    evt.stopPropagation();
+    showNextImage();
+  });
+
+  document.addEventListener("keydown", function (evt) {
+    if (lightbox.hidden) return;
+    if (evt.key === "Escape") closeLightbox();
+    else if (evt.key === "ArrowLeft" && lightboxImages.length > 1) showPrevImage();
+    else if (evt.key === "ArrowRight" && lightboxImages.length > 1) showNextImage();
   });
 
   // ---------------------------------------------------------------
