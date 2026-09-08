@@ -313,8 +313,8 @@ html, body {
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 0.04em;
-  margin: 0 0 4px;
-  font-size: 14px;
+  margin: 20px 0 4px;
+  font-size: 20px;
 }
 
 .modal-heading {
@@ -329,9 +329,9 @@ html, body {
 
 .modal-description {
   text-align: center;
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.5;
-  max-width: 46ch;
+  max-width: 76ch;
   margin: 16px auto 0;
 }
 
@@ -341,7 +341,7 @@ html, body {
   width: 110px;
 }
 
-.modal-media { margin-top: 20px; }
+.modal-media { width: 90%; margin: 20px auto; }
 
 /* --- reproductor de audio/voz --- */
 
@@ -440,7 +440,7 @@ html, body {
 .gate-switch {
   text-align: center;
   font-size: 14px;
-  margin: 0 0 20px;
+  margin: 20px 0 20px;
 }
 
 .link-btn {
@@ -476,9 +476,9 @@ html, body {
    y la fecha de nacimiento (un <input type="date"> nativo ni siquiera
    admite placeholder). */
 .field-label {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--ink);
   opacity: 0.8;
