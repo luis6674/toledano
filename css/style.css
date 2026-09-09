@@ -206,7 +206,7 @@ html, body {
   display: block;
   color: #fff;
   font-weight: 700;
-  font-size: clamp(12px, 1.1vw, 16px);
+  font-size: clamp(14px, 1.3vw, 20px);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
@@ -214,7 +214,7 @@ html, body {
   display: block;
   color: var(--green);
   font-weight: 700;
-  font-size: clamp(11px, 0.9vw, 14px);
+  font-size: clamp(13px, 1vw, 16px);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
