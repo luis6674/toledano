@@ -36,6 +36,14 @@
   </script>
   <!-- End Google Tag Manager -->
 
+  <!-- Fondo de la servilleta del modal de contenido: se referencia solo
+       desde CSS (background-image), así que sin este preload el navegador
+       no la pide hasta que se abre el primer candado (se nota el "salto"
+       al cargar). Cada uno con el mismo breakpoint que la media query de
+       css/style.css, para no pedir de más en el dispositivo equivocado. -->
+  <link rel="preload" as="image" href="assets/images/servilleta_desktop2.png" media="(min-width: 641px)" />
+  <link rel="preload" as="image" href="assets/images/servilleta_movil.png" media="(max-width: 640px)" />
+
   <link rel="stylesheet" href="assets/vendor/intl-tel-input/css/intlTelInput.min.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="shortcut icon" href="favicon.ico">
