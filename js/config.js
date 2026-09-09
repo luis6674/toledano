@@ -56,7 +56,12 @@ const SITE_CONFIG = {
  * description.
  *   - audio/video admiten además: src, poster (solo vídeo)
  *   - gallery admite además: images: [{ src, alt }] (y, opcionalmente,
- *     description, que se muestra como pie de foto)
+ *     description, que se muestra como pie de foto). Si además se indica
+ *     "thumbnail" (ruta a una imagen), se muestra solo esa foto de
+ *     portada y, al pulsarla, se abre el visor grande con todas las
+ *     "images" navegable con izquierda/derecha — pensado para cuando hay
+ *     varias fotos pero se quiere mostrar una sola miniatura en el
+ *     popup en vez del collage de postales superpuestas.
  *   - text admite además: body (puede tener saltos de línea con \n)
  *
  * IMPORTANTE: mientras un candado tenga "unlocked: false" da igual lo que
@@ -177,7 +182,13 @@ const LOCKS = [
       type: "gallery",
       title: "Mil mariposas",
       eyebrow: "Recuerdo desbloqueado",
-      images: [{ src: "assets/images/sample.jpg", alt: "Foto de El Toledano con su madre" }],
+      thumbnail: "assets/images/gallery1_thumb.png",
+      images: [
+        { src: "assets/images/gallery1/gallery1_1.jpg", alt: "Foto de El Toledano" },
+        { src: "assets/images/gallery1/gallery1_2.jpg", alt: "Foto de El Toledano" },
+        { src: "assets/images/gallery1/gallery1_3.jpg", alt: "Foto de El Toledano" },
+        { src: "assets/images/gallery1/gallery1_4.jpg", alt: "Foto de El Toledano" },
+      ],
       description: "Foto con mi madre.",
     },
   },

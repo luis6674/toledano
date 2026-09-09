@@ -445,7 +445,7 @@
         descriptionEl.textContent = content.description || "";
         break;
       case "gallery":
-        mediaEl.appendChild(buildGallery(content.images || []));
+        mediaEl.appendChild(buildGallery(content.images || [], content.thumbnail));
         if (content.description) {
           descriptionEl.textContent = content.description;
         } else {
@@ -552,22 +552,37 @@
     { left: "56%", top: "34%", rot: -8 },
   ];
 
-  function buildGallery(images) {
+  function buildGallery(images, thumbnail) {
     var wrap = document.createElement("div");
 
-    if (images.length > 1) {
+    if (thumbnail) {
+      // Con "thumbnail" se muestra solo esa foto de portada (normalmente
+      // ya es un colage recortado con su propia sombra, no una foto
+      // suelta, así que no lleva el borde/recorte cuadrado de las demás);
+      // al pulsarla se abre el visor con todas las "images" (aunque la
+      // portada en sí no forme parte de ellas), navegable con
+      // izquierda/derecha.
+      var coverImg = document.createElement("img");
+      coverImg.className = "gallery-thumbnail";
+      coverImg.src = thumbnail;
+      coverImg.alt = images[0] ? images[0].alt || "" : "";
+      coverImg.addEventListener("click", function () {
+        openLightbox(images, 0);
+      });
+      wrap.appendChild(coverImg);
+    } else if (images.length > 1) {
       wrap.appendChild(buildCollage(images));
     } else if (images.length === 1) {
-      var grid = document.createElement("div");
-      grid.className = "gallery-grid";
+      var grid2 = document.createElement("div");
+      grid2.className = "gallery-grid";
       var img = document.createElement("img");
       img.src = images[0].src;
       img.alt = images[0].alt || "";
       img.addEventListener("click", function () {
         openLightbox(images, 0);
       });
-      grid.appendChild(img);
-      wrap.appendChild(grid);
+      grid2.appendChild(img);
+      wrap.appendChild(grid2);
     }
 
     return wrap;
