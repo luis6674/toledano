@@ -209,10 +209,24 @@
       signatureEl.hidden = !subscribePanel.hidden;
     }
 
+    // aria-labelledby="modal-title" del modal debe apuntar siempre al
+    // <h2> del panel visible: se lo reasignamos cada vez que cambiamos
+    // de panel (los otros dos <h2> se quedan sin id para no duplicarlo).
+    var gateHeadings = modalBody.querySelectorAll(".modal-heading");
+    function syncModalTitleId() {
+      gateHeadings.forEach(function (h) {
+        h.removeAttribute("id");
+      });
+      var visiblePanel = modalBody.querySelector(".panel:not([hidden])");
+      var heading = visiblePanel && visiblePanel.querySelector(".modal-heading");
+      if (heading) heading.id = "modal-title";
+    }
+
     showSubscribeBtn.addEventListener("click", function () {
       passwordPanel.hidden = true;
       subscribePanel.hidden = false;
       syncSignatureVisibility();
+      syncModalTitleId();
     });
 
     // Al pulsar "Regístrate" (pendingLock nulo) se ve directamente el
@@ -224,6 +238,7 @@
       passwordPanel.hidden = false;
     }
     syncSignatureVisibility();
+    syncModalTitleId();
 
     wireMailingListSync(subscribeForm);
 
@@ -270,6 +285,7 @@
         successPanel.hidden = false;
         modalBody.classList.add("is-centered");
         syncSignatureVisibility();
+        syncModalTitleId();
       });
     });
 
@@ -492,6 +508,7 @@
     range.min = "0";
     range.max = "100";
     range.value = "0";
+    range.setAttribute("aria-label", "Progreso del audio");
 
     var duration = document.createElement("span");
     duration.className = "time";

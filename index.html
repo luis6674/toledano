@@ -5,6 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>El Toledano | Guillermo Toledano</title>
   <meta name="description" content="El Toledano: 10 historias, 10 canciones, el lugar donde todo empezó." />
+  <meta name="keywords" content="Guillermo Toledano, El Toledano, artista, cantante, música, canciones, álbum, disco, Sony Music, música española" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="El Toledano" />
+  <meta property="og:title" content="El Toledano | Guillermo Toledano" />
+  <meta property="og:description" content="El Toledano: 10 historias, 10 canciones, el lugar donde todo empezó." />
+  <meta property="og:url" content="https://eltoledano.es/" />
+  <meta property="og:image" content="https://eltoledano.es/assets/images/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="El Toledano | Guillermo Toledano" />
+  <meta name="twitter:description" content="El Toledano: 10 historias, 10 canciones, el lugar donde todo empezó." />
+  <meta name="twitter:image" content="https://eltoledano.es/assets/images/og-image.jpg" />
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != "dataLayer" ? "&l=" + l : "";
+      j.async = true;
+      j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, "script", "dataLayer", "GTM-N4ZXST");
+  </script>
+  <!-- End Google Tag Manager -->
+
   <link rel="stylesheet" href="assets/vendor/intl-tel-input/css/intlTelInput.min.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="shortcut icon" href="favicon.ico">
@@ -27,8 +58,13 @@
   <meta name="theme-color" content="#ffffff">
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N4ZXST"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
   <main id="stage-wrapper">
+    <h1 class="sr-only">El Toledano</h1>
     <div id="stage">
       <img class="bg" src="assets/images/fondo3.jpg" alt="Interior de El Toledano" />
 
@@ -70,8 +106,8 @@
   <div id="scroll-hint" aria-hidden="true">Desliza para ver todo el bar →</div>
 
   <!-- Modal genérico: se rellena por JS según el candado pulsado -->
-  <div id="modal-backdrop" hidden>
-    <div id="modal" class="napkin" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div id="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div id="modal" class="napkin">
       <button id="modal-close" type="button" aria-label="Cerrar">x</button>
       <div id="modal-body"></div>
     </div>
@@ -79,7 +115,7 @@
   </div>
 
   <!-- Lightbox de la galería: fotos a tamaño grande, con navegación -->
-  <div id="lightbox" hidden>
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de fotos" hidden>
     <button id="lightbox-prev" type="button" aria-label="Foto anterior">‹</button>
     <img id="lightbox-img" alt="" />
     <button id="lightbox-next" type="button" aria-label="Foto siguiente">›</button>
@@ -429,7 +465,7 @@
   </template>
 
   <template id="tpl-content">
-    <h2 class="modal-heading" data-role="title"></h2>
+    <h2 id="modal-title" class="modal-heading" data-role="title"></h2>
     <p class="modal-eyebrow" data-role="eyebrow"></p>
     <div class="modal-media" data-role="media"></div>
     <p class="modal-description" data-role="description"></p>
