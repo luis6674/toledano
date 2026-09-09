@@ -195,15 +195,24 @@
     var subscribePanel = modalBody.querySelector(".panel-subscribe");
     var passwordPanel = modalBody.querySelector(".panel-password");
     var successPanel = modalBody.querySelector(".panel-success");
+    var signatureEl = modalBody.querySelector(".modal-signature");
     var showSubscribeBtn = modalBody.querySelector('[data-action="show-subscribe"]');
     var subscribeForm = modalBody.querySelector(".subscribe-form");
     var subscribeMsg = modalBody.querySelector('[data-role="form-msg"]');
     var passwordForm = modalBody.querySelector(".password-form");
     var passwordMsg = modalBody.querySelector('[data-role="password-msg"]');
 
+    // La firma "El Toledano" no se muestra durante el formulario de alta
+    // (queda muy apretado con tantos campos), solo en los pasos de
+    // contraseña y de "gracias por registrarte".
+    function syncSignatureVisibility() {
+      signatureEl.hidden = !subscribePanel.hidden;
+    }
+
     showSubscribeBtn.addEventListener("click", function () {
       passwordPanel.hidden = true;
       subscribePanel.hidden = false;
+      syncSignatureVisibility();
     });
 
     // Al pulsar "Regístrate" (pendingLock nulo) se ve directamente el
@@ -214,6 +223,7 @@
       subscribePanel.hidden = true;
       passwordPanel.hidden = false;
     }
+    syncSignatureVisibility();
 
     wireMailingListSync(subscribeForm);
 
@@ -259,6 +269,7 @@
         subscribePanel.hidden = true;
         successPanel.hidden = false;
         modalBody.classList.add("is-centered");
+        syncSignatureVisibility();
       });
     });
 
