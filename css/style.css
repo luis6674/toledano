@@ -148,6 +148,40 @@ html, body {
   display: block;
 }
 
+/* Brillo pulsante sobre la pizarra "RESERVAS ABIERTAS" para que se note
+   que es clicable: un halo fijo suave + un anillo que se expande y se
+   desvanece en bucle, ambos ignorando los clics (pointer-events: none)
+   para no interferir con el enlace real. */
+#reserve-link::before,
+#reserve-link::after {
+  content: "";
+  position: absolute;
+  inset: -8%;
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+#reserve-link::before {
+  box-shadow: 0 0 16px 4px rgba(255, 197, 89, 0.55);
+}
+
+#reserve-link::after {
+  box-shadow: 0 0 0 0 rgba(255, 197, 89, 0.55);
+  animation: reserve-pulse 2.6s ease-out infinite;
+}
+
+@keyframes reserve-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 197, 89, 0.55); }
+  70% { box-shadow: 0 0 0 16px rgba(255, 197, 89, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 197, 89, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #reserve-link::after {
+    animation: none;
+  }
+}
+
 /* ---------- Candados ---------- */
 
 .lock {
