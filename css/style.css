@@ -145,6 +145,7 @@ html, body {
   left: 76.9%;
   width: 9.6%;
   height: 13.3%;
+  transform: skew(-10deg, 5deg);
   display: block;
 }
 
