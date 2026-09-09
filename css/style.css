@@ -383,6 +383,10 @@ html, body {
   width: 125px;
 }
 
+.modal-signature[hidden] {
+  display: none;
+}
+
 .modal-media { width: 90%; margin: 20px auto; }
 
 /* --- reproductor de audio/voz --- */
@@ -445,8 +449,8 @@ html, body {
    propia sombra, así que aquí no se le añade borde ni recorte cuadrado. */
 .gallery-thumbnail {
   display: block;
-  max-width: 260px;
-  max-height: 220px;
+  max-width: 360px;
+  max-height: 320px;
   width: auto;
   height: auto;
   margin: 0 auto;

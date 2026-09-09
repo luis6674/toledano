@@ -431,6 +431,7 @@
 
     var mediaEl = modalBody.querySelector('[data-role="media"]');
     var descriptionEl = modalBody.querySelector('[data-role="description"]');
+    var signatureEl = modalBody.querySelector(".modal-signature");
 
     modalHint.hidden = true;
     modalHint.textContent = "";
@@ -446,6 +447,9 @@
         break;
       case "gallery":
         mediaEl.appendChild(buildGallery(content.images || [], content.thumbnail));
+        if (signatureEl) {
+          signatureEl.hidden = true;
+        }
         if (content.description) {
           descriptionEl.textContent = content.description;
         } else {
