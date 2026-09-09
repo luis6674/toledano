@@ -148,36 +148,31 @@ html, body {
   display: block;
 }
 
-/* Brillo pulsante sobre la pizarra "RESERVAS ABIERTAS" para que se note
-   que es clicable: un halo fijo suave + un anillo que se expande y se
-   desvanece en bucle, ambos ignorando los clics (pointer-events: none)
-   para no interferir con el enlace real. */
-#reserve-link::before,
-#reserve-link::after {
-  content: "";
+/* Flechita que rebota justo encima de la pizarra "RESERVAS ABIERTAS"
+   para que se note que es clicable. Elemento aparte (no ::before/after
+   de #reserve-link) posicionado con las mismas coordenadas en % que el
+   resto de overlays sobre #stage, e ignorando los clics para no
+   interferir con el enlace real. */
+#reserve-arrow {
   position: absolute;
-  inset: -8%;
-  border-radius: 10px;
+  top: 45%;
+  left: 81.7%;
+  transform: translate(-50%, 0);
+  font-size: clamp(22px, 3vw, 42px);
+  line-height: 1;
+  color: #ffd166;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.85);
   pointer-events: none;
+  animation: reserve-arrow-bounce 1.3s ease-in-out infinite;
 }
 
-#reserve-link::before {
-  box-shadow: 0 0 16px 4px rgba(255, 197, 89, 0.55);
-}
-
-#reserve-link::after {
-  box-shadow: 0 0 0 0 rgba(255, 197, 89, 0.55);
-  animation: reserve-pulse 2.6s ease-out infinite;
-}
-
-@keyframes reserve-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(255, 197, 89, 0.55); }
-  70% { box-shadow: 0 0 0 16px rgba(255, 197, 89, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(255, 197, 89, 0); }
+@keyframes reserve-arrow-bounce {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 10px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #reserve-link::after {
+  #reserve-arrow {
     animation: none;
   }
 }
