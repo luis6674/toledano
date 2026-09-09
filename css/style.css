@@ -614,13 +614,17 @@ html, body {
 .form-grid input::placeholder { color: #cfcfcf; }
 
 /* Selector de país/prefijo de intl-tel-input sobre el campo de móvil:
-   por defecto pinta la flechita en gris oscuro, invisible sobre el fondo
-   oscuro del campo. */
+   por defecto pinta la flechita y el prefijo (+34) en gris oscuro,
+   invisibles sobre el fondo oscuro del campo. */
 .form-grid .iti {
   display: block;
   width: 100%;
   --iti-icon-color: #ccc;
   --iti-border-color: #444;
+}
+
+.form-grid .iti__selected-dial-code {
+  color: #fff;
 }
 
 /* El input de fecha nativo pinta su icono de calendario en negro por
