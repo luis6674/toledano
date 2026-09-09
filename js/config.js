@@ -222,20 +222,6 @@ const LOCKS = [
     },
   },
   {
-    id: "banqueta",
-    top: 81.15,
-    left: 59.34,
-    unlocked: false,
-    requiresPassword: false,
-    content: {
-      type: "audio",
-      title: "Mensaje de voz",
-      eyebrow: "Recuerdo desbloqueado",
-      src: "",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    },
-  },
-  {
     id: "bala",
     top: 88.66,
     left: 36.7,

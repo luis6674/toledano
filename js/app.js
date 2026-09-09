@@ -45,12 +45,18 @@
   }
 
   function openModal() {
+    // aria-labelledby solo se añade aquí, una vez que el contenido (con su
+    // #modal-title) ya está dentro de modal-body: si se dejara fijo en el
+    // HTML, apuntaría a un id que no existe mientras el modal está cerrado
+    // ("broken ARIA reference").
+    modalBackdrop.setAttribute("aria-labelledby", "modal-title");
     modalBackdrop.hidden = false;
     document.body.style.overflow = "hidden";
   }
 
   function closeModal() {
     modalBackdrop.hidden = true;
+    modalBackdrop.removeAttribute("aria-labelledby");
     document.body.style.overflow = "";
     modalBody.innerHTML = "";
     modalBody.classList.remove("is-centered");
