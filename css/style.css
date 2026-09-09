@@ -449,7 +449,7 @@ html, body {
    propia sombra, así que aquí no se le añade borde ni recorte cuadrado. */
 .gallery-thumbnail {
   display: block;
-  max-width: 360px;
+  max-width: min(360px, 100%);
   max-height: 320px;
   width: auto;
   height: auto;
