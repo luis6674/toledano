@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>El Toledano | Guillermo Toledano</title>
   <meta name="description" content="El Toledano: 10 historias, 10 canciones, el lugar donde todo empezó." />
+  <meta name="keywords" content="Guillermo Toledano, El Toledano, artista, cantante, música, canciones, álbum, disco, Sony Music, música española" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="El Toledano" />
@@ -63,6 +64,7 @@
   <!-- End Google Tag Manager (noscript) -->
 
   <main id="stage-wrapper">
+    <h1 class="sr-only">El Toledano</h1>
     <div id="stage">
       <img class="bg" src="assets/images/fondo3.jpg" alt="Interior de El Toledano" />
 
@@ -104,8 +106,8 @@
   <div id="scroll-hint" aria-hidden="true">Desliza para ver todo el bar →</div>
 
   <!-- Modal genérico: se rellena por JS según el candado pulsado -->
-  <div id="modal-backdrop" hidden>
-    <div id="modal" class="napkin" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div id="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div id="modal" class="napkin">
       <button id="modal-close" type="button" aria-label="Cerrar">x</button>
       <div id="modal-body"></div>
     </div>
@@ -113,7 +115,7 @@
   </div>
 
   <!-- Lightbox de la galería: fotos a tamaño grande, con navegación -->
-  <div id="lightbox" hidden>
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de fotos" hidden>
     <button id="lightbox-prev" type="button" aria-label="Foto anterior">‹</button>
     <img id="lightbox-img" alt="" />
     <button id="lightbox-next" type="button" aria-label="Foto siguiente">›</button>
@@ -463,7 +465,7 @@
   </template>
 
   <template id="tpl-content">
-    <h2 class="modal-heading" data-role="title"></h2>
+    <h2 id="modal-title" class="modal-heading" data-role="title"></h2>
     <p class="modal-eyebrow" data-role="eyebrow"></p>
     <div class="modal-media" data-role="media"></div>
     <p class="modal-description" data-role="description"></p>
