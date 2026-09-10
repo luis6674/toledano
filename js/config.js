@@ -73,7 +73,7 @@ const LOCKS = [
   {
     id: "perchero",
     top: 47,
-    left: 32.7,
+    left: 33.1,
     unlocked: false,
     requiresPassword: false,
     content: {
@@ -85,7 +85,7 @@ const LOCKS = [
   },
   {
     id: "fotos-pared",
-    top: 38.21,
+    top: 37.81,
     left: 41.04,
     unlocked: false,
     requiresPassword: false,
@@ -158,7 +158,7 @@ const LOCKS = [
   },
   {
     id: "bola-disco",
-    top: 16.21,
+    top: 15.9,
     left: 71.61,
     // Primer lote de lanzamiento, con contraseña.
     unlocked: true,
