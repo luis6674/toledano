@@ -121,22 +121,27 @@ html, body {
   -webkit-user-drag: none;
 }
 
-#logo-overlay {
-  position: absolute;
-  top: 1.5%;
-  left: 15.5%;
-  width: 19%;
-  pointer-events: none;
-}
-
+/* fondo4.jpg deja un recuadro dorado vacío bajo "EL TOLEDANO" a propósito:
+   el botón solo coloca ahí encima la imagen del CTA (boton_registrate2.png). */
 #registrate-btn {
-  /* Posición y tamaño calculados en JS a partir del recuadro real de
-     #logo-overlay (la franja "REGÍSTRATE PARA ACCEDER" del papel rasgado
-     ocupa, dentro de esa imagen, aprox. el 83%-99% de su alto). */
   position: absolute;
+  top: 44.31%;
+  left: 17.71%;
+  width: 13.28%;
+  height: 9.13%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: transparent;
   border: 0;
+  padding: 0;
   cursor: pointer;
+}
+
+#registrate-btn img {
+  display: block;
+  width: 85%;
+  height: auto;
 }
 
 #reserve-link {
@@ -347,7 +352,7 @@ html, body {
   position: relative;
   width: 740px;
   height: 589px;
-  background: transparent url("../assets/images/servilleta_desktop2.png") center / 100% auto no-repeat;
+  background: transparent url("../assets/images/servilleta_desktop_nueva.jpg") center / 100% auto no-repeat;
   padding: 72px 75px 74px 70px;
 }
 #modal-body {
@@ -410,7 +415,7 @@ html, body {
 .modal-signature {
   display: block;
   margin: 28px auto 0;
-  width: 125px;
+  width: 170px;
 }
 
 .modal-signature[hidden] {
@@ -576,6 +581,96 @@ html, body {
   line-height: 1.6;
   max-width: 50ch;
   margin: 0 auto;
+}
+
+/* ---------- Aviso emergente "Reservas abiertas" ---------- */
+
+#reserve-popup-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 950;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#reserve-popup-backdrop[hidden] { display: none; }
+
+#reserve-popup-backdrop.is-visible {
+  opacity: 1;
+}
+
+#reserve-popup {
+  position: relative;
+  width: min(420px, 92vw);
+  aspect-ratio: 1226 / 1004;
+  background: url("../assets/images/servilleta_desktop_nueva.jpg") center / 100% 100% no-repeat;
+  padding: 11% 13%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+#reserve-popup-backdrop.is-visible #reserve-popup {
+  transform: scale(1);
+}
+
+#reserve-popup-close {
+  position: absolute;
+  top: 6%;
+  right: 8%;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.reserve-popup-logo {
+  display: block;
+  width: 65%;
+  height: auto;
+  margin: 0 auto 4%;
+}
+
+.reserve-popup-title {
+  font-family: "Bebas Neue", Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: clamp(24px, 5.5vw, 34px);
+  line-height: 1.05;
+  margin: 0;
+}
+
+.reserve-popup-subtitle {
+  font-size: clamp(12px, 2.6vw, 15px);
+  line-height: 1.3;
+  margin: 6px 0 0;
+}
+
+.reserve-popup-btn {
+  display: inline-block;
+  margin-top: 6%;
+  background: var(--red);
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  font-size: clamp(13px, 2.6vw, 15px);
+  padding: 12px 26px;
+  white-space: nowrap;
 }
 
 /* --- formulario de suscripción --- */
@@ -765,7 +860,7 @@ html, body {
 @media (max-width: 640px) {
   .form-grid { grid-template-columns: 1fr; }
   #modal-backdrop { padding: 0; }
-  #modal.napkin { background-image: url("../assets/images/servilleta_movil.png"); width: 100vw; height: 152vw; padding: 10.8vw 12.9vw 11.1vw 12.5vw; }
+  #modal.napkin { background-image: url("../assets/images/servilleta_movil_nueva.jpg"); width: 100vw; height: 152vw; padding: 10.8vw 12.9vw 11.1vw 12.5vw; }
   #modal-close { top: 10px; right: 14px; }
   .modal-eyebrow { font-size: 18px; }
 }

@@ -3,7 +3,6 @@
 
   var stage = document.getElementById("stage");
   var locksLayer = document.getElementById("locks-layer");
-  var logoOverlay = document.getElementById("logo-overlay");
   var registrateBtn = document.getElementById("registrate-btn");
   var toastEl = document.getElementById("toast");
   var modalBackdrop = document.getElementById("modal-backdrop");
@@ -52,6 +51,9 @@
     modalBackdrop.setAttribute("aria-labelledby", "modal-title");
     modalBackdrop.hidden = false;
     document.body.style.overflow = "hidden";
+    // Si el aviso de "Reservas abiertas" seguía visible, que no se quede
+    // superpuesto con este modal.
+    closeReservePopup();
   }
 
   function closeModal() {
@@ -74,31 +76,6 @@
     if (evt.key === "Escape" && !modalBackdrop.hidden && lightbox.hidden) closeModal();
   });
 
-  // ---------------------------------------------------------------
-  // Posicionar el botón "Regístrate para acceder" sobre el papel
-  // rasgado que forma parte de assets/images/logo_home_txt.png
-  // ---------------------------------------------------------------
-
-  function layoutRegistrateButton() {
-    var rect = logoOverlay.getBoundingClientRect();
-    var stageRect = stage.getBoundingClientRect();
-    var top = rect.top - stageRect.top + rect.height * 0.82;
-    var left = rect.left - stageRect.left + rect.width * 0.01;
-    var width = rect.width * 0.8;
-    var height = rect.height * 0.17;
-    registrateBtn.style.top = top + "px";
-    registrateBtn.style.left = left + "px";
-    registrateBtn.style.width = width + "px";
-    registrateBtn.style.height = height + "px";
-  }
-
-  window.addEventListener("resize", layoutRegistrateButton);
-  if (logoOverlay.complete) {
-    layoutRegistrateButton();
-  } else {
-    logoOverlay.addEventListener("load", layoutRegistrateButton);
-  }
-
   registrateBtn.addEventListener("click", function () {
     openSubscribeGate(null);
   });
@@ -107,15 +84,56 @@
   // Enlace de "Reservar álbum" sobre la pizarra del fondo
   // ---------------------------------------------------------------
 
-  var reserveLink = document.getElementById("reserve-link");
-  if (SITE_CONFIG.reserveUrl) {
-    reserveLink.href = SITE_CONFIG.reserveUrl;
-  } else {
-    reserveLink.addEventListener("click", function (evt) {
-      evt.preventDefault();
-      showToast("El enlace para reservar el álbum estará disponible próximamente.");
-    });
+  function wireReserveLink(linkEl) {
+    if (SITE_CONFIG.reserveUrl) {
+      linkEl.href = SITE_CONFIG.reserveUrl;
+    } else {
+      linkEl.addEventListener("click", function (evt) {
+        evt.preventDefault();
+        showToast("El enlace para reservar el álbum estará disponible próximamente.");
+      });
+    }
   }
+
+  wireReserveLink(document.getElementById("reserve-link"));
+
+  // ---------------------------------------------------------------
+  // Aviso emergente de "Reservas abiertas": aparece solo a los pocos
+  // segundos de cargar la página y se cierra solo si el usuario no lo
+  // cierra antes (botón, click fuera o tecla Escape).
+  // ---------------------------------------------------------------
+
+  var reservePopupBackdrop = document.getElementById("reserve-popup-backdrop");
+  var reservePopupCloseBtn = document.getElementById("reserve-popup-close");
+  wireReserveLink(document.getElementById("reserve-popup-link"));
+
+  var reservePopupAutoCloseTimer = null;
+
+  function openReservePopup() {
+    reservePopupBackdrop.hidden = false;
+    // Deja pintar el estado inicial antes de añadir la clase, para que la
+    // transición de entrada (opacity/scale) se anime.
+    requestAnimationFrame(function () {
+      reservePopupBackdrop.classList.add("is-visible");
+    });
+    reservePopupAutoCloseTimer = setTimeout(closeReservePopup, 5000);
+  }
+
+  function closeReservePopup() {
+    clearTimeout(reservePopupAutoCloseTimer);
+    reservePopupBackdrop.classList.remove("is-visible");
+    reservePopupBackdrop.hidden = true;
+  }
+
+  reservePopupCloseBtn.addEventListener("click", closeReservePopup);
+  reservePopupBackdrop.addEventListener("click", function (evt) {
+    if (evt.target === reservePopupBackdrop) closeReservePopup();
+  });
+  document.addEventListener("keydown", function (evt) {
+    if (evt.key === "Escape" && !reservePopupBackdrop.hidden) closeReservePopup();
+  });
+
+  setTimeout(openReservePopup, 2000);
 
   // ---------------------------------------------------------------
   // Pintar los candados

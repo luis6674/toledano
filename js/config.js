@@ -30,7 +30,7 @@ const SITE_CONFIG = {
 };
 
 /**
- * Lista de candados sobre la imagen de fondo (assets/images/fondo3.jpg).
+ * Lista de candados sobre la imagen de fondo (assets/images/fondo4.jpg).
  *
  * Cada candado tiene esta forma:
  * {
