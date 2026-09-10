@@ -36,12 +36,15 @@
   </script>
   <!-- End Google Tag Manager -->
 
-  <!-- Fondo de la servilleta del modal de contenido: se referencia solo
-       desde CSS (background-image), así que sin este preload el navegador
-       no la pide hasta que se abre el primer candado (se nota el "salto"
-       al cargar). Cada uno con el mismo breakpoint que la media query de
-       css/style.css, para no pedir de más en el dispositivo equivocado. -->
-  <link rel="preload" as="image" href="assets/images/servilleta_desktop_nueva.jpg" media="(min-width: 641px)" />
+  <!-- Fondo de la servilleta del modal de contenido y del aviso de
+       "Reservas abiertas": se referencian solo desde CSS (background-image),
+       así que sin este preload el navegador no las pide hasta que se abre
+       el primer candado / aparece el aviso (se nota el "salto" al cargar).
+       servilleta_desktop_nueva.jpg se precarga siempre (sin media query)
+       porque el aviso emergente la usa en todos los tamaños de pantalla,
+       no solo en escritorio; la variante móvil del modal sí se limita al
+       mismo breakpoint que la media query de css/style.css. -->
+  <link rel="preload" as="image" href="assets/images/servilleta_desktop_nueva.jpg" />
   <link rel="preload" as="image" href="assets/images/servilleta_movil_nueva.jpg" media="(max-width: 640px)" />
 
   <link rel="stylesheet" href="assets/vendor/intl-tel-input/css/intlTelInput.min.css" />
