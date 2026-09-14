@@ -498,8 +498,12 @@
         break;
       case "gallery":
         mediaEl.appendChild(buildGallery(content.images || [], content.thumbnail));
+        // Con una sola foto (sin thumbnail de portada) sí que hay hueco de
+        // sobra para la firma; con varias (collage o thumbnail + varias
+        // "images") no, para evitar el scroll que daba pie a ocultarla.
         if (signatureEl) {
-          signatureEl.hidden = true;
+          var galleryImages = content.images || [];
+          signatureEl.hidden = !!content.thumbnail || galleryImages.length > 1;
         }
         if (content.description) {
           descriptionEl.textContent = content.description;

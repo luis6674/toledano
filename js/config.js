@@ -115,7 +115,7 @@ const LOCKS = [
       title: "No sé si quiero volver",
       eyebrow: "Recuerdo desbloqueado",
       src: "assets/audio/guille_nota_voz_1.mp3",
-      description: "Esta es una nota de voz grabada por El Toledano sobre el tema 'No sé si quiero volver'.",
+      description: "Nota de voz sobre el tema 'No sé si quiero volver'.",
     },
   },
   {
@@ -170,7 +170,7 @@ const LOCKS = [
       title: "Ven y báilame",
       eyebrow: "Recuerdo desbloqueado",
       images: [{ src: "assets/images/toledano01.jpg", alt: "Foto inédita de Guille Toledano" }],
-      description: "Foto inédita para celebrar este nuevo tema 'Ven y báilame'.",
+      description: "Foto inédita para celebrar el nuevo tema 'Ven y báilame'.",
     },
   },
   {
