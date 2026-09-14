@@ -119,7 +119,11 @@
     reservePopupAutoCloseTimer = setTimeout(closeReservePopup, 5000);
   }
 
+  // También cancela el setTimeout que muestra el aviso: si no, un candado
+  // abierto dentro de los primeros 2s (antes de que el aviso haya
+  // aparecido) no evitaría que apareciera igualmente encima más tarde.
   function closeReservePopup() {
+    clearTimeout(reservePopupShowTimer);
     clearTimeout(reservePopupAutoCloseTimer);
     reservePopupBackdrop.classList.remove("is-visible");
     reservePopupBackdrop.hidden = true;
@@ -133,7 +137,7 @@
     if (evt.key === "Escape" && !reservePopupBackdrop.hidden) closeReservePopup();
   });
 
-  setTimeout(openReservePopup, 2000);
+  var reservePopupShowTimer = setTimeout(openReservePopup, 2000);
 
   // ---------------------------------------------------------------
   // Pintar los candados
