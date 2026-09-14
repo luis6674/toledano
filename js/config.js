@@ -13,8 +13,10 @@
 
 const SITE_CONFIG = {
   // Contraseña que Sony envía en el email de bienvenida de la newsletter.
-  // Solo protege los candados marcados con "requiresPassword: true".
-  password: "eltoledano",
+  // Solo protege los candados marcados con "requiresPassword: true". No
+  // hace falta escribir aquí variantes con/sin tilde: la comprobación en
+  // js/app.js (openSubscribeGate) ignora acentos y mayúsculas/minúsculas.
+  password: "Hacerlecasoalcorazon",
 
   // Endpoint real de alta en la newsletter de Sony Music Fans (SMF), tal
   // cual lo facilitó Sony en form.html. Si algún día hay que desactivar
@@ -25,8 +27,8 @@ const SITE_CONFIG = {
 
   // URL de "reservar/comprar el álbum". No es un candado: es un enlace
   // externo siempre visible, colocado sobre la pizarra "RESERVAS ABIERTAS"
-  // del fondo. De momento apunta a la home de Sony Music como marcador.
-  reserveUrl: "https://www.sonymusic.es/",
+  // del fondo.
+  reserveUrl: "https://store.sonymusic.es/search?q=El+toledano&options%5Bprefix%5D=last",
 };
 
 /**
@@ -112,7 +114,7 @@ const LOCKS = [
       type: "audio",
       title: "No sé si quiero volver",
       eyebrow: "Recuerdo desbloqueado",
-      src: "assets/audio/sample-12s.mp3",
+      src: "assets/audio/guille_nota_voz_1.mp3",
       description: "Esta es una nota de voz grabada por El Toledano sobre el tema 'No sé si quiero volver'.",
     },
   },
@@ -182,13 +184,7 @@ const LOCKS = [
       type: "gallery",
       title: "Mil mariposas",
       eyebrow: "Recuerdo desbloqueado",
-      thumbnail: "assets/images/gallery1_thumb.png",
-      images: [
-        { src: "assets/images/gallery1/gallery1_1.jpg", alt: "Foto de El Toledano" },
-        { src: "assets/images/gallery1/gallery1_2.jpg", alt: "Foto de El Toledano" },
-        { src: "assets/images/gallery1/gallery1_3.jpg", alt: "Foto de El Toledano" },
-        { src: "assets/images/gallery1/gallery1_4.jpg", alt: "Foto de El Toledano" },
-      ],
+      images: [{ src: "assets/images/mariposa_foto.jpg", alt: "Foto de Guille Toledano con su madre" }],
       description: "Foto con mi madre.",
     },
   },

@@ -17,6 +17,13 @@
   // Utilidades
   // ---------------------------------------------------------------
 
+  // Normaliza acentos (á/à/ä -> a, ó -> o, etc.) para que la contraseña
+  // no dependa de si el visitante escribe o no la tilde ("corazon" y
+  // "corazón" deben valer igual).
+  function normalizeAccents(str) {
+    return str.normalize("NFD").replace(/[̀-ͯ]/g, "");
+  }
+
   var toastTimer = null;
   function showToast(message) {
     toastEl.textContent = message;
@@ -119,7 +126,11 @@
     reservePopupAutoCloseTimer = setTimeout(closeReservePopup, 5000);
   }
 
+  // También cancela el setTimeout que muestra el aviso: si no, un candado
+  // abierto dentro de los primeros 2s (antes de que el aviso haya
+  // aparecido) no evitaría que apareciera igualmente encima más tarde.
   function closeReservePopup() {
+    clearTimeout(reservePopupShowTimer);
     clearTimeout(reservePopupAutoCloseTimer);
     reservePopupBackdrop.classList.remove("is-visible");
     reservePopupBackdrop.hidden = true;
@@ -133,7 +144,7 @@
     if (evt.key === "Escape" && !reservePopupBackdrop.hidden) closeReservePopup();
   });
 
-  setTimeout(openReservePopup, 2000);
+  var reservePopupShowTimer = setTimeout(openReservePopup, 2000);
 
   // ---------------------------------------------------------------
   // Pintar los candados
@@ -316,7 +327,7 @@
     passwordForm.addEventListener("submit", function (evt) {
       evt.preventDefault();
       var value = passwordForm.elements.password.value.trim();
-      if (value.toLowerCase() === SITE_CONFIG.password.toLowerCase()) {
+      if (normalizeAccents(value.toLowerCase()) === normalizeAccents(SITE_CONFIG.password.toLowerCase())) {
         setPasswordVerified();
         closeModal();
         if (pendingLock) {
