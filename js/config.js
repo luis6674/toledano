@@ -173,7 +173,7 @@ const LOCKS = [
   },
   {
     id: "mariposa",
-    top: 54.52,
+    top: 52.52,
     left: 62,
     // Primer lote de lanzamiento, con contraseña.
     unlocked: true,
@@ -197,8 +197,8 @@ const LOCKS = [
     // confundir con el enlace de "Reservar álbum", que está más a la
     // derecha, sobre la pizarra, y no es un candado).
     id: "letrero-barra",
-    top: 57.8,
-    left: 69.6,
+    top: 89.8,
+    left: 40.6,
     unlocked: false,
     requiresPassword: false,
     content: {
@@ -223,8 +223,8 @@ const LOCKS = [
   },
   {
     id: "bala",
-    top: 88.66,
-    left: 36.7,
+    top: 90.66,
+    left: 29.7,
     unlocked: false,
     requiresPassword: false,
     content: {
