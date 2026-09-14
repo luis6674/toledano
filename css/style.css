@@ -480,7 +480,7 @@ html, body {
 
 .gallery-grid img {
   width: 140px;
-  height: 140px;
+  height: 190px;
   object-fit: cover;
   cursor: zoom-in;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
