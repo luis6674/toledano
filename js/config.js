@@ -13,8 +13,10 @@
 
 const SITE_CONFIG = {
   // Contraseña que Sony envía en el email de bienvenida de la newsletter.
-  // Solo protege los candados marcados con "requiresPassword: true".
-  password: "eltoledano",
+  // Solo protege los candados marcados con "requiresPassword: true". No
+  // hace falta escribir aquí variantes con/sin tilde: la comprobación en
+  // js/app.js (openSubscribeGate) ignora acentos y mayúsculas/minúsculas.
+  password: "Hacerlecasoalcorazon",
 
   // Endpoint real de alta en la newsletter de Sony Music Fans (SMF), tal
   // cual lo facilitó Sony en form.html. Si algún día hay que desactivar

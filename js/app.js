@@ -17,6 +17,13 @@
   // Utilidades
   // ---------------------------------------------------------------
 
+  // Normaliza acentos (á/à/ä -> a, ó -> o, etc.) para que la contraseña
+  // no dependa de si el visitante escribe o no la tilde ("corazon" y
+  // "corazón" deben valer igual).
+  function normalizeAccents(str) {
+    return str.normalize("NFD").replace(/[̀-ͯ]/g, "");
+  }
+
   var toastTimer = null;
   function showToast(message) {
     toastEl.textContent = message;
@@ -320,7 +327,7 @@
     passwordForm.addEventListener("submit", function (evt) {
       evt.preventDefault();
       var value = passwordForm.elements.password.value.trim();
-      if (value.toLowerCase() === SITE_CONFIG.password.toLowerCase()) {
+      if (normalizeAccents(value.toLowerCase()) === normalizeAccents(SITE_CONFIG.password.toLowerCase())) {
         setPasswordVerified();
         closeModal();
         if (pendingLock) {
