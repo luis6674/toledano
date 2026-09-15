@@ -47,6 +47,12 @@
   <link rel="preload" as="image" href="assets/images/servilleta_desktop_nueva.jpg" />
   <link rel="preload" as="image" href="assets/images/servilleta_movil_nueva.jpg" media="(max-width: 640px)" />
 
+  <!-- Miniaturas de los recuerdos ya desbloqueados con foto de portada: se
+       insertan por JS al abrir el candado, así que sin preload no empiezan
+       a pedirse hasta ese momento (se nota el "salto" al abrir el modal). -->
+  <link rel="preload" as="image" href="assets/images/guille_madre.png" />
+  <link rel="preload" as="image" href="assets/images/guille_inedita.png" />
+
   <link rel="stylesheet" href="assets/vendor/intl-tel-input/css/intlTelInput.min.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="shortcut icon" href="favicon.ico">
