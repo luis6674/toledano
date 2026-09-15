@@ -300,9 +300,9 @@ html, body {
 
 #toast {
   position: fixed;
+  top: 50%;
   left: 50%;
-  bottom: 32px;
-  transform: translate(-50%, 20px);
+  transform: translate(-50%, -50%) scale(0.95);
   background: var(--ink);
   color: #fff;
   padding: 12px 20px;
@@ -318,7 +318,7 @@ html, body {
 
 #toast.is-visible {
   opacity: 1;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, -50%) scale(1);
 }
 
 /* ---------- Modal ---------- */
