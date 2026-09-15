@@ -13,6 +13,12 @@
 
   var PASSWORD_KEY = "elToledano_passwordVerified";
 
+  // Referencia al audio/vídeo del contenido actualmente abierto: un
+  // `new Audio()` sigue sonando aunque se borre su reproductor del DOM
+  // (modalBody.innerHTML = ""), así que closeModal() necesita pausarlo
+  // explícitamente en vez de confiar en que desaparezca solo.
+  var activeMedia = null;
+
   // ---------------------------------------------------------------
   // Utilidades
   // ---------------------------------------------------------------
@@ -67,6 +73,10 @@
     modalBackdrop.hidden = true;
     modalBackdrop.removeAttribute("aria-labelledby");
     document.body.style.overflow = "";
+    if (activeMedia) {
+      activeMedia.pause();
+      activeMedia = null;
+    }
     modalBody.innerHTML = "";
     modalBody.classList.remove("is-centered");
     modalHint.hidden = true;
@@ -472,6 +482,7 @@
   function openContentModal(lock) {
     var tpl = document.getElementById("tpl-content");
     var node = tpl.content.cloneNode(true);
+    activeMedia = null;
     modalBody.innerHTML = "";
     modalBody.classList.remove("is-centered");
     modalBody.appendChild(node);
@@ -561,6 +572,7 @@
     if (!src) return wrap;
 
     var audio = new Audio(src);
+    activeMedia = audio;
 
     playBtn.addEventListener("click", function () {
       if (audio.paused) {
@@ -597,7 +609,10 @@
     var video = document.createElement("video");
     video.controls = true;
     if (poster) video.poster = poster;
-    if (src) video.src = src;
+    if (src) {
+      video.src = src;
+      activeMedia = video;
+    }
     return video;
   }
 
