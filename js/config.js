@@ -141,7 +141,7 @@ const LOCKS = [
     requiresPassword: true,
     content: {
       type: "video",
-      title: "Detrás de cámaras",
+      title: "Ya no me avisas",
       eyebrow: "Recuerdo desbloqueado",
       src: "assets/video/bts_rodaje.mp4",
       poster: "assets/images/bts_rodaje_poster.jpg",
