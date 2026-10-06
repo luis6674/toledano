@@ -28,7 +28,7 @@ const SITE_CONFIG = {
   // URL de "reservar/comprar el álbum". No es un candado: es un enlace
   // externo siempre visible, colocado sobre la pizarra "RESERVAS ABIERTAS"
   // del fondo.
-  reserveUrl: "https://store.sonymusic.es/search?q=El+toledano&options%5Bprefix%5D=last",
+  reserveUrl: "https://store.sonymusic.es/collections/guille-toledano",
 };
 
 /**
@@ -136,13 +136,16 @@ const LOCKS = [
     id: "camara",
     top: 32.67,
     left: 74.08,
-    unlocked: false,
-    requiresPassword: false,
+    // Primer lote de lanzamiento, con contraseña.
+    unlocked: true,
+    requiresPassword: true,
     content: {
-      type: "gallery",
-      title: "Nombre canción",
+      type: "video",
+      title: "Detrás de cámaras",
       eyebrow: "Recuerdo desbloqueado",
-      images: [{ src: "assets/images/sample.jpg", alt: "Foto de recuerdo" }],
+      src: "assets/video/bts_rodaje.mp4",
+      poster: "assets/images/bts_rodaje_poster.jpg",
+      description: "Un vistazo detrás de las cámaras durante el rodaje.",
     },
   },
   {
