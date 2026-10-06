@@ -136,7 +136,7 @@ const LOCKS = [
     id: "camara",
     top: 32.67,
     left: 74.08,
-    // Primer lote de lanzamiento, con contraseña.
+    // Con contraseña.
     unlocked: true,
     requiresPassword: true,
     content: {
@@ -194,19 +194,36 @@ const LOCKS = [
     },
   },
   {
-    // Candado sobre la barra, junto al letrero ovalado "El Toledano" (no
-    // confundir con el enlace de "Reservar álbum", que está más a la
-    // derecha, sobre la pizarra, y no es un candado).
     id: "letrero-barra",
     top: 89.8,
     left: 40.6,
-    unlocked: false,
-    requiresPassword: false,
+    // Con contraseña.
+    unlocked: true,
+    requiresPassword: true,
     content: {
-      type: "text",
-      title: "Nombre canción",
+      type: "gallery",
+      title: "Quédate un ratito",
       eyebrow: "Recuerdo desbloqueado",
-      body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      thumbnail: "assets/images/quedate_un_ratito_thumb.png",
+      images: [
+        { src: "assets/images/quedate-un-ratito/foto1.jpeg", alt: "Foto de recuerdo 1" },
+        { src: "assets/images/quedate-un-ratito/foto2.jpeg", alt: "Foto de recuerdo 2" },
+        { src: "assets/images/quedate-un-ratito/foto3.jpeg", alt: "Foto de recuerdo 3" },
+        { src: "assets/images/quedate-un-ratito/foto4.jpeg", alt: "Foto de recuerdo 4" },
+        { src: "assets/images/quedate-un-ratito/foto5.jpeg", alt: "Foto de recuerdo 5" },
+        { src: "assets/images/quedate-un-ratito/foto6.jpeg", alt: "Foto de recuerdo 6" },
+        { src: "assets/images/quedate-un-ratito/foto7.jpeg", alt: "Foto de recuerdo 7" },
+        { src: "assets/images/quedate-un-ratito/foto8.jpeg", alt: "Foto de recuerdo 8" },
+        { src: "assets/images/quedate-un-ratito/foto9.jpeg", alt: "Foto de recuerdo 9" },
+        { src: "assets/images/quedate-un-ratito/foto10.jpeg", alt: "Foto de recuerdo 10" },
+        { src: "assets/images/quedate-un-ratito/foto11.jpeg", alt: "Foto de recuerdo 11" },
+        { src: "assets/images/quedate-un-ratito/foto12.jpeg", alt: "Foto de recuerdo 12" },
+        { src: "assets/images/quedate-un-ratito/foto13.jpeg", alt: "Foto de recuerdo 13" },
+        { src: "assets/images/quedate-un-ratito/foto14.jpeg", alt: "Foto de recuerdo 14" },
+        { src: "assets/images/quedate-un-ratito/foto15.jpeg", alt: "Foto de recuerdo 15" },
+        { src: "assets/images/quedate-un-ratito/foto16.jpeg", alt: "Foto de recuerdo 16" },
+        { src: "assets/images/quedate-un-ratito/foto17.jpeg", alt: "Foto de recuerdo 17" },
+      ],
     },
   },
   {

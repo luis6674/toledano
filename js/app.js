@@ -509,12 +509,12 @@
         break;
       case "gallery":
         mediaEl.appendChild(buildGallery(content.images || [], content.thumbnail));
-        // Con una sola foto (con o sin thumbnail de portada) hay hueco de
-        // sobra para la firma; con varias (collage) no, para evitar el
-        // scroll que daba pie a ocultarla.
+        // Con portada (thumbnail) o con una sola foto el modal solo muestra
+        // una imagen, así que hay hueco de sobra para la firma; solo el
+        // collage de varias fotos montado dentro del modal no deja sitio.
         if (signatureEl) {
           var galleryImages = content.images || [];
-          signatureEl.hidden = galleryImages.length > 1;
+          signatureEl.hidden = !content.thumbnail && galleryImages.length > 1;
         }
         if (content.description) {
           descriptionEl.textContent = content.description;
