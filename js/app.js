@@ -160,6 +160,13 @@
   // Pintar los candados
   // ---------------------------------------------------------------
 
+  // Rótulo del candado: "label" si existe (los recuerdos que llevan una
+  // frase en vez de título no tienen otro nombre que mostrar) o, si no, el
+  // título del contenido.
+  function lockLabelText(lock) {
+    return lock.label || lock.content.title || "";
+  }
+
   LOCKS.forEach(function (lock) {
     var btn = document.createElement("button");
     btn.type = "button";
@@ -172,15 +179,16 @@
     setLockIcon(img, lock);
     btn.appendChild(img);
 
-    // Todo candado desbloqueado muestra su título + "Desbloqueado" al
+    // Todo candado desbloqueado muestra su rótulo + "Desbloqueado" al
     // pasar el ratón por encima (ver CSS: .lock-label solo es visible en
     // :hover/:focus-visible).
-    if (lock.unlocked && lock.content.title) {
+    var lockText = lockLabelText(lock);
+    if (lock.unlocked && lockText) {
       var labelWrap = document.createElement("span");
       labelWrap.className = "lock-label";
       var titleEl = document.createElement("span");
       titleEl.className = "lock-title";
-      titleEl.textContent = lock.content.title;
+      titleEl.textContent = lockText;
       var subtitleEl = document.createElement("span");
       subtitleEl.className = "lock-subtitle";
       subtitleEl.textContent = "Desbloqueado";
@@ -191,7 +199,7 @@
 
     btn.setAttribute(
       "aria-label",
-      lock.unlocked ? "Recuerdo desbloqueado: " + (lock.content.title || lock.id) : "Recuerdo bloqueado"
+      lock.unlocked ? "Recuerdo desbloqueado: " + (lockText || lock.id) : "Recuerdo bloqueado"
     );
 
     btn.addEventListener("click", function () {
@@ -488,8 +496,18 @@
     modalBody.appendChild(node);
 
     var content = lock.content;
-    modalBody.querySelector('[data-role="eyebrow"]').textContent = content.eyebrow || "";
-    modalBody.querySelector('[data-role="title"]').textContent = content.title || "";
+    var headingEl = modalBody.querySelector('[data-role="title"]');
+    var eyebrowEl = modalBody.querySelector('[data-role="eyebrow"]');
+    if (content.sentence) {
+      // Recuerdos con una frase en lugar de título + "Recuerdo desbloqueado".
+      // Sigue siendo el <h2 id="modal-title">, así que nombra el diálogo.
+      headingEl.textContent = content.sentence;
+      headingEl.classList.add("is-sentence");
+      eyebrowEl.remove();
+    } else {
+      headingEl.textContent = content.title || "";
+      eyebrowEl.textContent = content.eyebrow || "";
+    }
 
     var mediaEl = modalBody.querySelector('[data-role="media"]');
     var descriptionEl = modalBody.querySelector('[data-role="description"]');
