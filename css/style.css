@@ -422,6 +422,7 @@ html, body {
 @media (min-width: 1023px) and (max-height: 660px) {
   .modal-heading.is-sentence {
     font-size: 25px;
+    padding: 12px 0;
   }
 }
 
