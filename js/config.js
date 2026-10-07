@@ -146,7 +146,7 @@ const LOCKS = [
     requiresPassword: true,
     content: {
       type: "video",
-      sentence: "el rodaje de este vídeo fue muuuy guay 😍 os quiero, gracias por el apoyo siempre",
+      sentence: "el rodaje de este vídeo fue muuuy guay 🥰 os quiero, gracias por el apoyo siempre",
       src: "assets/video/bts_rodaje.mp4",
       poster: "assets/images/bts_rodaje_poster.jpg",
     },
