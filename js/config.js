@@ -56,6 +56,10 @@ const SITE_CONFIG = {
  *
  * Todos los tipos admiten: title, eyebrow (texto pequeño superior),
  * description.
+ *   - En lugar de title + eyebrow se puede poner "sentence" (una frase):
+ *     sustituye a ambos en el modal. Los recuerdos con frase no tienen
+ *     título, así que necesitan además "label" en el propio candado (fuera
+ *     de "content"): es la palabra que sale al pasar el ratón por encima.
  *   - audio/video admiten además: src, poster (solo vídeo)
  *   - gallery admite además: images: [{ src, alt }] (y, opcionalmente,
  *     description, que se muestra como pie de foto). Si además se indica
@@ -134,6 +138,7 @@ const LOCKS = [
   },
   {
     id: "camara",
+    label: "Cámara",
     top: 32.67,
     left: 74.08,
     // Con contraseña.
@@ -141,11 +146,9 @@ const LOCKS = [
     requiresPassword: true,
     content: {
       type: "video",
-      title: "Ya no me avisas",
-      eyebrow: "Recuerdo desbloqueado",
+      sentence: "el rodaje de este vídeo fue muuuy guay 🥰 os quiero, gracias por el apoyo siempre",
       src: "assets/video/bts_rodaje.mp4",
       poster: "assets/images/bts_rodaje_poster.jpg",
-      description: "Un vistazo detrás de las cámaras durante el rodaje.",
     },
   },
   {
@@ -195,6 +198,7 @@ const LOCKS = [
   },
   {
     id: "letrero-barra",
+    label: "Posavasos",
     top: 89.8,
     left: 40.6,
     // Con contraseña.
@@ -202,28 +206,11 @@ const LOCKS = [
     requiresPassword: true,
     content: {
       type: "gallery",
-      title: "Quédate un ratito",
-      eyebrow: "Recuerdo desbloqueado",
-      thumbnail: "assets/images/quedate_un_ratito_thumb.png",
-      images: [
-        { src: "assets/images/quedate-un-ratito/foto1.jpeg", alt: "Foto de recuerdo 1" },
-        { src: "assets/images/quedate-un-ratito/foto2.jpeg", alt: "Foto de recuerdo 2" },
-        { src: "assets/images/quedate-un-ratito/foto3.jpeg", alt: "Foto de recuerdo 3" },
-        { src: "assets/images/quedate-un-ratito/foto4.jpeg", alt: "Foto de recuerdo 4" },
-        { src: "assets/images/quedate-un-ratito/foto5.jpeg", alt: "Foto de recuerdo 5" },
-        { src: "assets/images/quedate-un-ratito/foto6.jpeg", alt: "Foto de recuerdo 6" },
-        { src: "assets/images/quedate-un-ratito/foto7.jpeg", alt: "Foto de recuerdo 7" },
-        { src: "assets/images/quedate-un-ratito/foto8.jpeg", alt: "Foto de recuerdo 8" },
-        { src: "assets/images/quedate-un-ratito/foto9.jpeg", alt: "Foto de recuerdo 9" },
-        { src: "assets/images/quedate-un-ratito/foto10.jpeg", alt: "Foto de recuerdo 10" },
-        { src: "assets/images/quedate-un-ratito/foto11.jpeg", alt: "Foto de recuerdo 11" },
-        { src: "assets/images/quedate-un-ratito/foto12.jpeg", alt: "Foto de recuerdo 12" },
-        { src: "assets/images/quedate-un-ratito/foto13.jpeg", alt: "Foto de recuerdo 13" },
-        { src: "assets/images/quedate-un-ratito/foto14.jpeg", alt: "Foto de recuerdo 14" },
-        { src: "assets/images/quedate-un-ratito/foto15.jpeg", alt: "Foto de recuerdo 15" },
-        { src: "assets/images/quedate-un-ratito/foto16.jpeg", alt: "Foto de recuerdo 16" },
-        { src: "assets/images/quedate-un-ratito/foto17.jpeg", alt: "Foto de recuerdo 17" },
-      ],
+      sentence: "algunos momentos que querría que hubieran durado mucho más 🥹",
+      // Un único collage ya compuesto: se muestra tal cual y, al pulsarlo,
+      // se abre el mismo archivo en grande en el visor.
+      thumbnail: "assets/images/posavasos_collage.webp",
+      images: [{ src: "assets/images/posavasos_collage.webp", alt: "Collage de fotos de recuerdos" }],
     },
   },
   {
