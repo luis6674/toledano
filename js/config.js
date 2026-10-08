@@ -223,7 +223,7 @@ const LOCKS = [
     requiresPassword: true,
     content: {
       type: "gallery",
-      sentence: "os debía una receta de gyozas….aprovechad para hacerlas y comerlas con alguien que queráis, no perdáis ni un segundo 🫶",
+      sentence: "os debía una receta de gyozas… aprovechad para hacerlas y comerlas con alguien que queráis, no perdáis ni un segundo 🫶",
       // La receta es una imagen en vertical: miniatura pequeña en el modal
       // (ligera para precargarla) y la imagen completa, legible, en el visor.
       thumbnail: "assets/images/receta_gyozas_thumb.jpg",
