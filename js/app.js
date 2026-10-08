@@ -503,6 +503,9 @@
       // Sigue siendo el <h2 id="modal-title">, así que nombra el diálogo.
       headingEl.textContent = content.sentence;
       headingEl.classList.add("is-sentence");
+      // Las frases muy largas necesitan un tamaño algo menor para no
+      // desbordar el modal (y que salga scroll).
+      if (content.sentence.length > 100) headingEl.classList.add("is-long");
       eyebrowEl.remove();
     } else {
       headingEl.textContent = content.title || "";
