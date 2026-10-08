@@ -215,15 +215,19 @@ const LOCKS = [
   },
   {
     id: "reloj-arena",
+    label: "Reloj de arena",
     top: 83.23,
     left: 43,
-    unlocked: false,
-    requiresPassword: false,
+    // Con contraseña.
+    unlocked: true,
+    requiresPassword: true,
     content: {
-      type: "text",
-      title: "Nombre canción",
-      eyebrow: "Recuerdo desbloqueado",
-      body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      type: "gallery",
+      sentence: "os debía una receta de gyozas….aprovechad para hacerlas y comerlas con alguien que queráis, no perdáis ni un segundo 🫶",
+      // La receta es una imagen en vertical: miniatura pequeña en el modal
+      // (ligera para precargarla) y la imagen completa, legible, en el visor.
+      thumbnail: "assets/images/receta_gyozas_thumb.jpg",
+      images: [{ src: "assets/images/receta_gyozas.jpg", alt: "Receta de gyozas de carrillera: ingredientes y elaboración" }],
     },
   },
   {
