@@ -78,15 +78,16 @@ const SITE_CONFIG = {
 const LOCKS = [
   {
     id: "perchero",
+    label: "Paraguas",
     top: 47,
     left: 33.1,
-    unlocked: false,
-    requiresPassword: false,
+    // Con contraseña.
+    unlocked: true,
+    requiresPassword: true,
     content: {
-      type: "text",
-      title: "Nombre canción",
-      eyebrow: "Recuerdo desbloqueado",
-      body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      type: "audio",
+      sentence: "ya tocaba alguna un poco más triste también 🥹 a ver si os gusta",
+      src: "assets/audio/no_ha_dejado_de_llover.m4a",
     },
   },
   {
