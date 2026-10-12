@@ -548,10 +548,18 @@
         }
         break;
       case "text":
-        var p = document.createElement("p");
-        p.className = "manuscript-body";
-        p.textContent = content.body || "";
-        mediaEl.appendChild(p);
+        if (content.body) {
+          var p = document.createElement("p");
+          p.className = "manuscript-body";
+          p.textContent = content.body;
+          mediaEl.appendChild(p);
+        } else {
+          // Recuerdo que es solo una frase (sin cuerpo, audio ni imagen):
+          // no hay bloque de contenido, y la frase queda centrada en el
+          // modal junto con la firma.
+          mediaEl.remove();
+          modalBody.classList.add("is-centered");
+        }
         descriptionEl.remove();
         break;
       default:
