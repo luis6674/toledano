@@ -125,16 +125,15 @@ const LOCKS = [
   },
   {
     id: "corazones",
+    label: "Corazones",
     top: 42.03,
     left: 59.15,
-    unlocked: false,
-    requiresPassword: false,
+    // Con contraseña.
+    unlocked: true,
+    requiresPassword: true,
     content: {
-      type: "audio",
-      title: "Mensaje de voz",
-      eyebrow: "Recuerdo desbloqueado",
-      src: "",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      type: "text",
+      sentence: "“Y echo en falta esos besos, sentir que tocaba el cielo. Se quedó un final abierto entre tú y yo…”",
     },
   },
   {
