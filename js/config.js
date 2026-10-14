@@ -92,19 +92,19 @@ const LOCKS = [
   },
   {
     id: "fotos-pared",
+    label: "Billete",
     top: 37.81,
     left: 41.04,
-    unlocked: false,
-    requiresPassword: false,
+    // Con contraseña.
+    unlocked: true,
+    requiresPassword: true,
     content: {
       type: "gallery",
-      title: "Nombre canción",
-      eyebrow: "Recuerdo desbloqueado",
-      images: [
-        { src: "assets/images/sample.jpg", alt: "Foto de recuerdo 1" },
-        { src: "assets/images/sample.jpg", alt: "Foto de recuerdo 2" },
-        { src: "assets/images/sample.jpg", alt: "Foto de recuerdo 3" },
-      ],
+      sentence: "gnocchi con trufa de cuando estuve en roma para ir abriendo apetito para el álbum…👨🏻‍🍳",
+      // Receta en imagen vertical: miniatura ligera en el modal y la imagen
+      // completa, legible, en el visor.
+      thumbnail: "assets/images/receta_gnocchi_thumb.jpg",
+      images: [{ src: "assets/images/receta_gnocchi.jpg", alt: "Receta de gnocchi de trufa y guanciale: ingredientes y elaboración" }],
     },
   },
   {
