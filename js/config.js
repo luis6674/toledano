@@ -153,15 +153,18 @@ const LOCKS = [
   },
   {
     id: "esquina",
+    label: "Warning",
     top: 28.77,
     left: 90.8,
-    unlocked: false,
-    requiresPassword: false,
+    // Con contraseña.
+    unlocked: true,
+    requiresPassword: true,
     content: {
-      type: "text",
-      title: "Nombre canción",
-      eyebrow: "Recuerdo desbloqueado",
-      body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      type: "gallery",
+      sentence: "💣💣💣foto exclusiva del photoshoot del álbum…cada vez menos jiji",
+      // Foto horizontal: miniatura ligera en el modal y la foto completa en el visor.
+      thumbnail: "assets/images/photoshoot_exclusiva_thumb.jpg",
+      images: [{ src: "assets/images/photoshoot_exclusiva.jpg", alt: "Foto exclusiva del photoshoot del álbum: Guille Toledano apoyado en la barra de un bar" }],
     },
   },
   {
