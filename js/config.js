@@ -235,15 +235,16 @@ const LOCKS = [
   },
   {
     id: "bala",
+    label: "Bala",
     top: 90.66,
     left: 29.7,
-    unlocked: false,
-    requiresPassword: false,
+    // Con contraseña.
+    unlocked: true,
+    requiresPassword: true,
     content: {
-      type: "gallery",
-      title: "Nombre canción",
-      eyebrow: "Recuerdo desbloqueado",
-      images: [{ src: "assets/images/sample.jpg", alt: "Foto de recuerdo" }],
+      type: "audio",
+      sentence: "ya casi podéis escuchar todo lo que hemos estado trabajando este tiempo, no queda NADAAAA",
+      src: "assets/audio/acapella_bala_perdida.m4a",
     },
   },
 ];
